@@ -1,93 +1,98 @@
-# TDDD27_2026
+# SoloPadel \- Specifications
+
+# Core Concept
+
+A web app that lets Linköping singles padel players:
+
+* Track their rating  
+* Find other players with similar rating and availability  
+* Compete to climb leaderboards
 
 
+# Technical specifications
 
-## Getting started
+**Frontend:**
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+* React  
+  * Language: TypeScript  
+  * Development tool: Vite
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+**Backend**
 
-## Add your files
+* Supabase  
+  * Database: Supabase Postgres   
+  * Authentication: Supabase Auth  
+  * Realtime functionality: Supabase subscriptions
 
-* [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+# Minimal Functionality
 
-```
-cd existing_repo
-git remote add origin https://gitlab.liu.se/jaaka770/tddd27_2026.git
-git branch -M main
-git push -uf origin main
-```
+**Register:**
 
-## Integrate with your tools
+* Inputs personal information   
+  * Name, email, password phone number, etc  
+* Input skill level to determine starting rating  
+  * New (500), beginner (800), intermediate (1000) etc
 
-* [Set up project integrations](https://gitlab.liu.se/jaaka770/tddd27_2026/-/settings/integrations)
+**Login**
 
-## Collaborate with your team
+**Facility Discovery View**
 
-* [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+* List all the padel facilities  
+* Displays number of members in each facility (Real time)  
+* Clicking on a facility takes you to “facility leaderboard” view
 
-## Test and Deploy
+**Facility Leaderboard View**
 
-Use the built-in continuous integration in GitLab.
+* Shows a leaderboard of all members based on rating (Real time)  
+* A user can join the facility so they appear on the leaderboard  
+* A user can challenge a player on the leaderboard which takes you to “send challenge” view
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+**Send Challenge View**
 
-***
+* Select a time  
+* Send message creates a chat in “challenges” view
 
-# Editing this README
+**Challenges View**
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+* A list of all the incoming and outgoing challenges (Real time)  
+* Clicking on a challenge expands the corresponding “chat” view
 
-## Suggestions for a good README
+**Chat View (Real time)**
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+* The receiver of the challenge can accept or deny the challenge  
+* The sender can cancel the challenge  
+* Both can send messages to each other  
+* Once the receiver accepts, both players can report results  
+  * When a result is reported the rating of both players is updated which updates the leaderboard for each facility they are in (Real-time).
 
-## Name
-Choose a self-explaining name for your project.
+**Account Settings View**
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+* View and edit account information.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+# Extra functionality (if time allows)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+* Deployment  
+* Additional cities  
+  * A city search bar in the facility discovery page  
+* Profile View  
+  * Clicking a player in the leaderboard opens a profile view instead of immediately sending the challenge  
+  * Shows a personal info, profile image, short “about me”, additional statistics, facility memberships etc.  
+  * A challenge button.  
+* Additional statistics (shown in leaderboard or profile view) (dynamic):  
+  * Win loss record  
+  * Winning percentage  
+  * Form (shows result of last 5 games)  
+  * Response time (how long it takes for the person to respond to challenges)  
+  * Activity (how much the player is playing)  
+* Schedule  
+  * Players can set which times they usually are available to play.  
+  * A player can see in the leaderboard if a player has overlapping availability.  
+  * In the profile view a player can see what overlapping availability exists  
+* QuickFind  
+  * Based on schedule, rating, facility memberships and more, retrieves a list of players which are suitable to challenge.  
+* Trustworthiness  
+  * If two player report conflicting match result, both players rating are unchanged and both players receive a small trustworthiness penalty  
+* Notifications  
+  * Email notifications when receiving new messages, challenges etc.  
+* Reviews  
+  * A player can leave 1-5 stars on a player they have played against to reflect sportsmanship of a player.
