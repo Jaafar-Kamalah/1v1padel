@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+/* =========================
+   Theme variables
+   ========================= */
+
+:root {
+  --background: #312e2b;
+
+  --foreground: white;
+
+  --primary-gradient: linear-gradient(rgb(129, 182, 76) 0%, rgb(93, 153, 72) 100%);
+
+  --radius: 10px;
+}
+
+/* =========================
+   Base styles
+   ========================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  min-height: 100vh;
+  font-family: sans-serif;
+  line-height: 1.4;
+}
+
+/* =========================
+   Reusable element styles
+   ========================= */
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
