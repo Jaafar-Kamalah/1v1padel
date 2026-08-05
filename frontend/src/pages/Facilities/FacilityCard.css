@@ -1,0 +1,66 @@
+.fac-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.fac-card:hover {
+  transform: translateY(-5px);
+}
+
+.fac-poster {
+  position: relative;
+}
+
+.fac-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fac-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.8)
+  );
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.fac-card:hover .fac-overlay {
+  opacity: 1;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.fac-name {
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.fac-name h3 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 639px) {
+  .fac-name {
+    font-size: 1.1rem;
+  }
+}
