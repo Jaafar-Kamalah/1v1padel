@@ -1,19 +1,24 @@
 import "./FacilityCard.css"
 
-function FacilityCard() {
+interface Props{
+  imageUrl: string;
+  name: string;
+}
+
+function FacilityCard({imageUrl, name}: Props) {  
   return (
     <div className="fac-card">
       <div className="fac-poster">
         <img
-          src="https://assets.matchi.se/archive/2022/03/thumb_ae073ee112b48cbd025a020a1d9774fc.jpg"
-          alt="Nordic Wellness Padel poster"
+          src={imageUrl}
+          alt={name + " poster"}
         />
         <div className="fac-overlay"></div>
       </div>
       <div className="fac-name">
-        <h4>Nordic Wellness Linköping Tornby Padel</h4>
+        <h4>{name}</h4>
       </div>
-      <button className="favorite-btn" onClick={() => alert("click")}></button>
+      <button className="fac-btn" onClick={() => alert("click")}></button>
     </div>
   );
 }
