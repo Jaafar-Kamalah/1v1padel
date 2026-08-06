@@ -1,3 +1,5 @@
+/* @import "tailwindcss"; */
+
 /* =========================
    Theme variables
    ========================= */
@@ -7,7 +9,24 @@
 
   --foreground: white;
 
-  --primary-gradient: linear-gradient(rgb(129, 182, 76) 0%, rgb(93, 153, 72) 100%);
+  --green-gradient: linear-gradient(
+    rgb(129, 182, 76) 0%,
+    rgb(93, 153, 72) 100%
+  );
+
+  --dark-gradient: linear-gradient(
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+
+  --box-shadow:
+    rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset,
+    rgba(0, 0, 0, 0.14) 0px 1px 2px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+
+  --text-shadow: rgba(0, 0, 0, 0.1) 0px 1px 0px;
+
+  --text-color: rgba(255, 255, 255, 0.9);
+
 
   --radius: 10px;
 }
@@ -25,9 +44,10 @@ body {
   background: var(--background);
   color: var(--foreground);
   min-height: 100vh;
-  font-family:'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.4;
   margin: 0;
+  color: var(--text-color);
 }
 
 /* =========================

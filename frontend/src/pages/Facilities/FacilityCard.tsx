@@ -11,7 +11,7 @@ function FacilityCard() {
         <div className="fac-overlay"></div>
       </div>
       <div className="fac-name">
-        <h3>Nordic Wellness Linköping Tornby Padel</h3>
+        <h4>Nordic Wellness Linköping Tornby Padel</h4>
       </div>
       <button className="favorite-btn" onClick={() => alert("click")}></button>
     </div>

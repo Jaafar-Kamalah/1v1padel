@@ -1,9 +1,10 @@
 .fac-card {
   position: relative;
-  border-radius: 8px;
+  border-radius: var(--radius);
   overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.2);
   transition: transform 0.2s;
+  background-image: var(--dark-gradient);
+  box-shadow: var(--box-shadow);
 }
 
 .fac-card:hover {
@@ -50,13 +51,14 @@
 .fac-name {
   padding: 1rem;
   font-size: 1.2rem;
-  font-weight: 600;
+  text-shadow: var(--text-shadow);
 }
 
-.fac-name h3 {
+.fac-name h4 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 0;
 }
 
 @media (max-width: 639px) {
