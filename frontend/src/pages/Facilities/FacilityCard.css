@@ -1,13 +1,14 @@
 .fac-card {
   border-radius: var(--radius);
   overflow: hidden;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   background-image: var(--dark-gradient);
   box-shadow: var(--box-shadow);
 }
 
 .fac-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.3);
 }
 
 .fac-poster {

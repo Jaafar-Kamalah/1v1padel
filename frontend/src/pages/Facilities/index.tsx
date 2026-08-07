@@ -27,7 +27,7 @@ function Facilities() {
         <h1>My Facilities</h1>
         <div className="fac-grid">
           {myFacilities.map((f) => (
-            <FacilityCard imageUrl={f.imageUrl} name={f.name} id={f.id} />
+            <FacilityCard imageUrl={f.imageUrl} name={f.name} id={f.id} key={f.id} />
           ))}
         </div>
       </div>
@@ -36,7 +36,7 @@ function Facilities() {
         <h1>All Facilities</h1>
         <div className="fac-grid">
           {allFacilities.map((f) => (
-            <FacilityCard imageUrl={f.imageUrl} name={f.name} id={f.id}/>
+            <FacilityCard imageUrl={f.imageUrl} name={f.name} id={f.id} key={f.id}/>
           ))}
         </div>
       </div>

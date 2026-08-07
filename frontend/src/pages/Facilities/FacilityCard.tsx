@@ -13,7 +13,8 @@ function FacilityCard({imageUrl, name, id}: Props) {
       <div className="fac-poster">
         <img
           src={imageUrl}
-          alt={name + " poster"}
+          alt={name + " logo"}
+          loading="lazy"
         />
         <div className="fac-overlay"></div>
       </div>
