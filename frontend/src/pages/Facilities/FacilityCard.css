@@ -1,5 +1,4 @@
 .fac-card {
-  position: relative;
   border-radius: var(--radius);
   overflow: hidden;
   transition: transform 0.2s;
@@ -38,14 +37,6 @@
 
 .fac-card:hover .fac-overlay {
   opacity: 1;
-}
-
-.fac-btn {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 .fac-name {

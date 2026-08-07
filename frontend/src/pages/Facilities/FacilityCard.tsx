@@ -1,13 +1,15 @@
+import { Link } from "react-router-dom";
 import "./FacilityCard.css"
 
 interface Props{
   imageUrl: string;
   name: string;
+  id: number;
 }
 
-function FacilityCard({imageUrl, name}: Props) {  
+function FacilityCard({imageUrl, name, id}: Props) {
   return (
-    <div className="fac-card">
+    <Link to={"/facility/" + id} className="fac-card">
       <div className="fac-poster">
         <img
           src={imageUrl}
@@ -18,8 +20,7 @@ function FacilityCard({imageUrl, name}: Props) {
       <div className="fac-name">
         <h4>{name}</h4>
       </div>
-      <button className="fac-btn" onClick={() => alert("click")}></button>
-    </div>
+    </Link>
   );
 }
 
