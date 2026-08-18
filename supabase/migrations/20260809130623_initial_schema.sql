@@ -90,3 +90,220 @@ select
 from public.memberships m
 join public.profiles p on p.id = m.user_id
 order by m.facility_id, m.rating desc;
+
+-- ============================================================
+-- ROW LEVEL SECURITY 
+-- (deny access to these tables if no bypass policy exists)
+-- ============================================================
+alter table public.facilities      enable row level security;
+alter table public.profiles        enable row level security;
+alter table public.memberships     enable row level security;
+alter table public.challenges      enable row level security;
+alter table public.messages        enable row level security;
+alter table public.initial_ratings enable row level security
+
+-- ============================================================
+-- facilities policies: users can see all facilities
+-- ============================================================
+grant select on public.facilities to authenticated;
+
+create policy "Users can view facilities"
+on public.facilities for select
+to authenticated 
+using (true);
+
+-- ============================================================
+-- profiles policies: users can see & create their own profiles
+-- ============================================================
+grant insert (first_name, last_name, rating) on public.profiles to authenticated;
+grant select on public.profiles to authenticated;
+
+create policy "Users can view their own profile"
+on public.profiles for select
+to authenticated
+using (id = auth.uid());
+
+create policy "Users can create their own profile"
+on public.profiles for insert
+to authenticated
+with check (
+  id = auth.uid() and
+  rating in (select rating from public.initial_ratings)
+);
+
+-- ============================================================
+-- memberships policies: users can see all membership and 
+-- create/delete their own memberships
+-- ============================================================
+grant insert (id, user_id, facility_id) on public.memberships to authenticated;
+grant select, delete on public.memberships to authenticated;
+
+create policy "Users can view their all memberships"
+on public.memberships for select
+to authenticated
+using (true);
+
+create policy "Users can create their own membership"
+on public.memberships for insert
+to authenticated
+with check (
+  user_id = auth.uid()
+);
+
+create policy "Users can delete their own membership"
+on public.memberships for delete
+to authenticated
+using (user_id = auth.uid());
+
+-- ============================================================
+-- challenges policies: users can see and send new challenges,
+-- users can update the status and winner of their challenges
+-- ============================================================
+grant insert (sender_user_id, receiver_user_id, facility_id, status) on public.challenges to authenticated;
+grant select, update on public.challenges to authenticated;
+
+create policy "Users can view their own challenge"
+on public.challenges for select
+to authenticated
+using (auth.uid() in (sender_user_id, receiver_user_id));
+
+create policy "Users can send a challenge to someone else"
+on public.challenges for insert
+to authenticated
+with check (
+  sender_user_id = auth.uid()
+  and receiver_user_id != auth.uid()
+  and status = 'pending'
+
+  -- Sender is a member of the facility
+  and exists (
+    select 1
+    from public.memberships m
+    where m.user_id = sender_user_id
+      and m.facility_id = challenges.facility_id
+  )
+
+  -- Receiver is a member of the same facility
+  and exists (
+    select 1
+    from public.memberships m
+    where m.user_id = receiver_user_id
+      and m.facility_id = challenges.facility_id
+  )
+);
+
+create policy "Users can update the status and winner of a challenge"
+on public.challenges for update
+to authenticated
+using (auth.uid() in (sender_user_id, receiver_user_id))
+with check (
+  winner_user_id is null or 
+  winner_user_id in (sender_user_id, receiver_user_id)
+);
+
+-- prevent invalid updates of challenge 
+create or replace function public.validate_challenge_update()
+returns trigger as $$
+begin
+  -- make all field except  status and winner immutable
+  if new.sender_user_id != old.sender_user_id or
+     new.receiver_user_id != old.receiver_user_id or
+     new.facility_id != old.facility_id or
+     new.id != old.id or 
+     new.sent_at != old.sent_at then
+    raise exception 'can only change status and winner'; 
+  end if;
+
+  -- pending challenge update handling
+  if OLD.status = 'pending' then
+    if NEW.status not in ('pending', 'accepted', 'denied') then
+      raise exception 'invalid status transition from pending';
+    end if;
+
+    -- only the receiver can accept/deny
+    if NEW.status != OLD.status
+       and auth.uid() != OLD.receiver_user_id then
+      raise exception 'only the receiver can accept or deny a challenge';
+    end if;
+
+    -- winner cannot be set while pending
+    if NEW.winner_user_id is not null then
+      raise exception 'cannot set winner while challenge is pending';
+    end if;
+
+  -- accepted challenge update handling
+  elsif OLD.status = 'accepted' then
+
+    -- if a winner is selected, automatically complete it
+    if NEW.winner_user_id is not null then
+      NEW.status := 'completed';
+    else
+      NEW.status := 'accepted';
+    end if;
+
+    -- don't allow accepted -> denied/pending
+    if NEW.status not in ('accepted', 'completed') then
+      raise exception 'invalid status transition from accepted';
+    end if;
+
+  -- completed/denied challenges are immutable
+  elsif OLD.status in ('completed', 'denied') then
+    raise exception 'completed or denied challenges cannot be modified';
+  end if;
+  return new;
+end;
+$$ language plpgsql;
+
+create trigger challenges_update_trigger
+before update on public.challenges
+for each row execute function public.validate_challenge_update();
+
+-- ============================================================
+-- messages policies: users can see and send new messages
+-- ============================================================
+grant select on public.messages to authenticated;
+grant insert (content, challenge_id, sender_user_id) on public.messages to authenticated;
+
+create policy "Users can view their sent and received messages"
+on public.messages for select
+to authenticated
+using (
+  exists (
+    select 1 from public.challenges c
+    where c.id = messages.challenge_id and 
+          auth.uid() in (c.sender_user_id, c.receiver_user_id)
+  )
+);
+
+create policy "Users can send messages"
+on public.messages for insert
+to authenticated
+with check (
+  sender_user_id = auth.uid() and
+  content is not null and
+  exists (
+    select 1 from public.challenges c
+    where c.id = messages.challenge_id and 
+    auth.uid() in (c.sender_user_id, c.receiver_user_id)
+  )
+);
+
+-- ============================================================
+-- initial_ratings policies: users can see all initial_ratings
+-- ============================================================
+grant select on public.initial_ratings to authenticated;
+
+create policy "Users can view initial ratings"
+on public.initial_ratings for select
+to authenticated 
+using (true);
+
+-- ============================================================
+-- facility_leaderboard policies: users can view leaderboards
+-- ============================================================
+grant select on public.facility_leaderboard to authenticated;
+
+-- No RLS policy needed since RLS applies to base tables, not views
+
+-- NOTE: Unless security invoker is used for a view it is called
+-- with creators role (in this case superprivlidges). 
