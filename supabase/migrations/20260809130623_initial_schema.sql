@@ -115,7 +115,7 @@ using (true);
 -- ============================================================
 -- profiles policies: users can see & create their own profiles
 -- ============================================================
-grant insert (first_name, last_name, rating) on public.profiles to authenticated;
+grant insert (id, first_name, last_name, rating) on public.profiles to authenticated;
 grant select on public.profiles to authenticated;
 
 create policy "Users can view their own profile"
@@ -135,7 +135,7 @@ with check (
 -- memberships policies: users can see all membership and 
 -- create/delete their own memberships
 -- ============================================================
-grant insert (id, user_id, facility_id) on public.memberships to authenticated;
+grant insert (user_id, facility_id) on public.memberships to authenticated;
 grant select, delete on public.memberships to authenticated;
 
 create policy "Users can view their all memberships"
