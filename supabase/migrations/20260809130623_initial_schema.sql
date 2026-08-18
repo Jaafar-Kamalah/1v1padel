@@ -89,7 +89,7 @@ select
   p.rating
 from public.memberships m
 join public.profiles p on p.id = m.user_id
-order by m.facility_id, m.rating desc;
+order by m.facility_id, p.rating desc;
 
 -- ============================================================
 -- ROW LEVEL SECURITY 
@@ -100,7 +100,7 @@ alter table public.profiles        enable row level security;
 alter table public.memberships     enable row level security;
 alter table public.challenges      enable row level security;
 alter table public.messages        enable row level security;
-alter table public.initial_ratings enable row level security
+alter table public.initial_ratings enable row level security;
 
 -- ============================================================
 -- facilities policies: users can see all facilities
