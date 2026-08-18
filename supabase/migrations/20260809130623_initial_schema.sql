@@ -258,6 +258,31 @@ create trigger challenges_update_trigger
 before update on public.challenges
 for each row execute function public.validate_challenge_update();
 
+-- prevent invalid updates of challenge 
+create or replace function public.update_ratings()
+returns trigger as $$
+begin
+  -- Trigger once a challenge transitions into completed status
+  if new.status = 'completed' and old.status != 'completed' then
+    -- Winner gets +25 points to their rating
+    update public.profiles
+    set rating = rating + 25
+    where id = new.winner_user_id;
+    -- Loser gets -25 points to their rating
+    update public.profiles
+    set rating = rating - 25
+    where id in (new.sender_user_id, new.receiver_user_id)
+      and id != new.winner_user_id;
+
+  end if;
+  return new;
+end;
+$$ language plpgsql security definer set search_path = public;
+
+create trigger ratings_update_trigger
+after update on public.challenges
+for each row execute function public.update_ratings();
+
 -- ============================================================
 -- messages policies: users can see and send new messages
 -- ============================================================
