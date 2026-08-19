@@ -7,15 +7,8 @@ import "./index.css";
 type Facility = Database["public"]["Tables"]["facilities"]["Row"];
 
 function Facilities() {
-  const myFacilities = [
-    {
-      imageUrl:
-        "https://assets.matchi.se/archive/2022/03/thumb_ae073ee112b48cbd025a020a1d9774fc.jpg",
-      name: "Nordic Wellness Linköping Tornby Padel",
-      id: 1,
-    },
-  ];
-
+  // TODO: Implement loading myFacilities after setting up auth
+  const [myFacilities, setmyFacilities] = useState<Facility[]>([]);
   const [allFacilities, setAllFacilities] = useState<Facility[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -46,7 +39,7 @@ function Facilities() {
         <div className="fac-grid">
           {myFacilities.map((f) => (
             <FacilityCard
-              imageUrl={f.imageUrl}
+              imageUrl={f.image_url}
               name={f.name}
               id={f.id}
               key={f.id}
