@@ -105,11 +105,11 @@ alter table public.initial_ratings enable row level security;
 -- ============================================================
 -- facilities policies: users can see all facilities
 -- ============================================================
-grant select on public.facilities to authenticated;
+grant select on public.facilities to anon, authenticated;
 
 create policy "Users can view facilities"
 on public.facilities for select
-to authenticated 
+to anon, authenticated 
 using (true);
 
 -- ============================================================
