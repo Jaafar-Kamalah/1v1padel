@@ -14,7 +14,7 @@
 
 .fac-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 346px));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 250px));
   gap: clamp(1rem, 2vw, 2rem);
   width: 100%;
   justify-content: center;
