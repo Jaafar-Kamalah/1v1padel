@@ -1,23 +1,38 @@
 import "./index.css";
 import supabase from "../../lib/supabase";
 import { useState } from "react";
+import { useAuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, seterror] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
+    setLoading(true);
 
-    if (error) {
-      console.error(error);
-      alert(error.message);
-    } else {
-      alert("Success");
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        alert("Supabase error: " + error);
+        console.error("Supabase error: " + error);
+      } else {
+        alert("Registration succeeded!");
+        navigate("/");
+      }
+    } catch (err) {
+      alert("Unexpected error: " + err);
+      console.error("Unexpected error: " + err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -42,7 +57,9 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit">Continue</button>
+          <button type="submit" disabled={loading}>
+            Continue
+          </button>
         </form>
       </div>
     </>
