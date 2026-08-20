@@ -147,7 +147,14 @@ create policy "Users can create their own membership"
 on public.memberships for insert
 to authenticated
 with check (
-  user_id = auth.uid()
+  -- user must hava profile
+  exists (
+    select 1
+    from public.profiles
+    where id = auth.uid()
+  )
+  -- user can only insert their own membership
+  and user_id = auth.uid()
 );
 
 create policy "Users can delete their own membership"
