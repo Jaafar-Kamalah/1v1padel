@@ -321,13 +321,13 @@ with check (
 );
 
 -- ============================================================
--- initial_ratings policies: users can see all initial_ratings
+-- initial_ratings policies: everyone can see all initial_ratings
 -- ============================================================
-grant select on public.initial_ratings to authenticated;
+grant select on public.initial_ratings to anon;
 
-create policy "Users can view initial ratings"
+create policy "Everyone can view initial ratings"
 on public.initial_ratings for select
-to authenticated 
+to anon 
 using (true);
 
 -- ============================================================
