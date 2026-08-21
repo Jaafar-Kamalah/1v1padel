@@ -26,6 +26,16 @@ h1 {
     padding: 5px;
 }
 
+.input-group select {
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    padding: 5px;
+}
+
+.input-group select option {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 button {
     width: 100%;
     border-radius: 10px;
