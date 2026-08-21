@@ -324,10 +324,11 @@ with check (
 -- initial_ratings policies: everyone can see all initial_ratings
 -- ============================================================
 grant select on public.initial_ratings to anon;
+grant select on public.initial_ratings to authenticated;
 
 create policy "Everyone can view initial ratings"
 on public.initial_ratings for select
-to anon 
+to anon, authenticated
 using (true);
 
 -- ============================================================
