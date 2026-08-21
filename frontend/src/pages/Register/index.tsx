@@ -9,9 +9,9 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [startingRating, setStartingRating] = useState<number | null>(null);
-  const [ratings, setRatings] = useState<any[]>([]); // TODO: change to type initial_rating after basic facility discovery merge
 
-  const [error, seterror] = useState("");
+  const [ratings, setRatings] = useState<any[]>([]); // TODO: change to type initial_rating after basic facility discovery merge
+  //const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ function Register() {
       .select("*")
       .then(({ data, error }) => {
         if (error) console.error(error);
-        else setRatings(data);
+        else setRatings(data ?? []);
       });
   }, []);
 
@@ -31,18 +31,36 @@ function Register() {
     setLoading(true);
 
     try {
+      // 1. Create user
       const { data, error } = await supabase.auth.signUp({
-        email: email,
+        email: email.trim(),
         password: password,
       });
-
       if (error) {
-        alert("Supabase error: " + error);
-        console.error("Supabase error: " + error);
-      } else {
-        alert("Registration succeeded!");
-        navigate("/");
+        alert("Supabase error: " + error.message);
+        console.error("Supabase error: " + error.message);
+        return;
       }
+      // 2. Create profile
+      const userId = data.user?.id; // If email verification is enabled in future this will return null
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .insert({
+          id: userId,
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          rating: startingRating,
+        });
+
+      if (profileError) {
+        alert("Profile creation error: " + profileError.message);
+        console.error(profileError.message);
+        // TODO: remove user if profile creation failed for consistency
+        // A user without a profile can't however cause damage so not a security risk atm
+        return;
+      }
+      alert("Registration succeeded!");
+      navigate("/");
     } catch (err) {
       alert("Unexpected error: " + err);
       console.error("Unexpected error: " + err);
