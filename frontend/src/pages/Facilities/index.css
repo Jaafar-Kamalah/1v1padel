@@ -1,8 +1,8 @@
-.home {
+.home-page {
   padding: 2rem 0;
 }
 
-.fac-grid-container {
+.home-page .fac-grid-container {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 1rem;
   margin: 1rem 2rem;
@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-.fac-grid {
+.home-page .fac-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 250px));
   gap: clamp(1rem, 2vw, 2rem);
@@ -21,7 +21,7 @@
 }
 
 @media (max-width: 639px) {
-  .home {
+  .home-page {
     padding: 1rem 0;
   }
 }

@@ -33,7 +33,7 @@ function Facilities() {
   }
 
   return (
-    <div className="home">
+    <div className="home-page">
       <div className="fac-grid-container">
         <h1>My Facilities</h1>
         <div className="fac-grid">
