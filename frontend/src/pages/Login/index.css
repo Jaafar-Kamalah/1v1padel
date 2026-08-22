@@ -1,0 +1,12 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+}
+
+.login-page button {
+    width: 50%;
+    border-radius: 10px;
+    background-color: green;
+    padding: 10px;
+    font: 20px;
+}

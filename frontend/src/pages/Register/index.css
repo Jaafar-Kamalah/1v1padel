@@ -1,0 +1,19 @@
+.register-page {
+    display: flex;
+    justify-content: center;
+}
+
+.register-page h1 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.register-page button {
+    width: 100%;
+    border-radius: 10px;
+    background-color: green;
+    padding: 10px;
+    font: 20px;
+}

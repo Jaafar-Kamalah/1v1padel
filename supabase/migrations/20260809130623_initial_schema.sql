@@ -147,7 +147,14 @@ create policy "Users can create their own membership"
 on public.memberships for insert
 to authenticated
 with check (
-  user_id = auth.uid()
+  -- user must hava profile
+  exists (
+    select 1
+    from public.profiles
+    where id = auth.uid()
+  )
+  -- user can only insert their own membership
+  and user_id = auth.uid()
 );
 
 create policy "Users can delete their own membership"
@@ -314,13 +321,14 @@ with check (
 );
 
 -- ============================================================
--- initial_ratings policies: users can see all initial_ratings
+-- initial_ratings policies: everyone can see all initial_ratings
 -- ============================================================
+grant select on public.initial_ratings to anon;
 grant select on public.initial_ratings to authenticated;
 
-create policy "Users can view initial ratings"
+create policy "Everyone can view initial ratings"
 on public.initial_ratings for select
-to authenticated 
+to anon, authenticated
 using (true);
 
 -- ============================================================
