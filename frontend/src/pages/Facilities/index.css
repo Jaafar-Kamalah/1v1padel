@@ -2,6 +2,11 @@
   padding: 2rem 0;
 }
 
+.home-page h1 {
+  font-size: 28px;
+  margin-top: 6px;
+}
+
 .home-page .fac-grid-container {
   background-color: rgba(0, 0, 0, 0.2);
   padding: 1rem;
