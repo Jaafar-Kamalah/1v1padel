@@ -70,7 +70,7 @@ function Register() {
   }
 
   return (
-    <>
+    <div className="register-page">
       <div className="card">
         <form onSubmit={handleSubmit}>
           <h1>Register an Account</h1>
@@ -129,7 +129,7 @@ function Register() {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 

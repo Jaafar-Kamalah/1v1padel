@@ -1,42 +1,16 @@
-body {
+.register-page {
     display: flex;
     justify-content: center;
 }
 
-.card {
-    padding: 32px;
-    width: 400px;
-    text-align: center;
-}
-
-h1 {
+.register-page h1 {
     margin-top: 0;
     margin-bottom: 24px;
     font-size: 32px;
     font-weight: 700;
 }
 
-.input-group {
-    margin-bottom: 20px;
-}
-
-.input-group input {
-    background-color: rgba(255, 255, 255, 0.08);
-    width: 100%;
-    padding: 5px;
-}
-
-.input-group select {
-    background-color: rgba(255, 255, 255, 0.08);
-    width: 100%;
-    padding: 5px;
-}
-
-.input-group select option {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-button {
+.register-page button {
     width: 100%;
     border-radius: 10px;
     background-color: green;

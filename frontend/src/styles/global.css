@@ -9,7 +9,10 @@
 
   --foreground: white;
 
-  --primary-gradient: linear-gradient(rgb(129, 182, 76) 0%, rgb(93, 153, 72) 100%);
+  --primary-gradient: linear-gradient(
+    rgb(129, 182, 76) 0%,
+    rgb(93, 153, 72) 100%
+  );
 
   --radius: 10px;
 }
@@ -45,4 +48,33 @@ img {
 
 * {
   box-sizing: border-box;
+}
+
+/* =========================
+   Reusable Class styles
+   ========================= */
+.card {
+  padding: 32px;
+  width: 400px;
+  text-align: center;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input {
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    padding: 5px;
+}
+
+.input-group select {
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    padding: 5px;
+}
+
+.input-group select option {
+    background-color: rgba(0, 0, 0, 0.7);
 }

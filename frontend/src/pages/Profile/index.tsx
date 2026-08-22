@@ -19,7 +19,7 @@ function Profile() {
   const {session} = useAuthContext();
 
   return (
-    <>
+    <div className="profile-page">
       <div className="card">
         <h1>Profile</h1>
         <p>Email: {session?.user.email}</p>
@@ -27,7 +27,7 @@ function Profile() {
           {loggingOut ? "Logging out..." : "Log Out"}
         </button>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,6 +1,7 @@
 import supabase from "../../lib/supabase";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./index.css"
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -36,7 +37,7 @@ function Register() {
   }
 
   return (
-    <>
+    <div className="login-page">
       <div className="card">
         <form onSubmit={handleSubmit}>
           <div className="input-group">
@@ -62,7 +63,7 @@ function Register() {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }
 
