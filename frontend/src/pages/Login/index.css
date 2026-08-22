@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    padding: 32px;
+    width: 400px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    background-color: rgba(255, 255, 255, 0.08);
+    width: 100%;
+    padding: 5px;
+}
+
+button {
+    width: 50%;
+    border-radius: 10px;
+    background-color: green;
+    padding: 10px;
+    font: 20px;
+}
