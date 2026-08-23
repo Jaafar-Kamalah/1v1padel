@@ -1,21 +1,17 @@
 import { Link } from "react-router-dom";
-import "./FacilityCard.css"
+import "./FacilityCard.css";
 
-interface Props{
+interface Props {
   imageUrl: string;
   name: string;
   id: number;
 }
 
-function FacilityCard({imageUrl, name, id}: Props) {
+function FacilityCard({ imageUrl, name, id }: Props) {
   return (
     <Link to={"/facility/" + id} className="fac-card">
       <div className="fac-poster">
-        <img
-          src={imageUrl}
-          alt={name + " logo"}
-          loading="lazy"
-        />
+        <img src={imageUrl} alt={name + " logo"} loading="lazy" />
         <div className="fac-overlay"></div>
       </div>
       <div className="fac-name">

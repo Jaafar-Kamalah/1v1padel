@@ -36,7 +36,7 @@
   transition: opacity 0.2s;
 }
 
-.fac-card .fac-card:hover .fac-overlay {
+.fac-card:hover .fac-overlay {
   opacity: 1;
 }
 
