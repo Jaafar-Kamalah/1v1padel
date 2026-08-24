@@ -53,7 +53,14 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/facility/:id" element={<Facility />} />
+        <Route
+          path="/facility/:id"
+          element={
+            <PrivateRoute>
+              <Facility />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );
