@@ -8,54 +8,79 @@ import { useAuthContext } from "../../contexts/AuthContext";
 type Facility = Database["public"]["Tables"]["facilities"]["Row"];
 
 function Facilities() {
-  // TODO: Implement loading myFacilities after setting up auth
   const [myFacilities, setMyFacilities] = useState<Facility[]>([]);
   const [allFacilities, setAllFacilities] = useState<Facility[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [myFacilitiesLoading, setMyFacilitiesLoading] = useState(true);
+  const [allFacilitiesLoading, setAllFacilitiesLoading] = useState(true);
   const { session } = useAuthContext();
+  const userId = session?.user?.id;
 
-  // Load facilites once after mount
-  useEffect(() => {
-    async function loadFacilities() {
-      const userId = session?.user?.id;
+  async function loadAllFacilities() {
+    const { data, error } = await supabase.from("facilities").select("*");
 
-      const allFacilitiesPromise = supabase.from("facilities").select("*");
-
-      // Request joined facilities if session is valid
-      const myFacilitiesPromise = userId
-        ? supabase
-            .from("memberships")
-            .select("facilities(*)")
-            .eq("user_id", userId)
-        : Promise.resolve({ data: [], error: null });
-
-      const [allFacilitiesResult, myFacilitiesResult] = await Promise.all([
-        allFacilitiesPromise,
-        myFacilitiesPromise,
-      ]);
-
-      if (allFacilitiesResult.error) {
-        console.error("Error fetching facilities: ", allFacilitiesResult.error);
-      } else {
-        setAllFacilities(allFacilitiesResult.data);
-      }
-
-      if (myFacilitiesResult.error) {
-        console.error("Error fetching facilities: ", myFacilitiesResult.error);
-      } else {
-        const myFacilitiesData = myFacilitiesResult.data ?? [];
-        // Convert from [{facilities: {...}}, {facilities: {...}} to [{...}, {...}]
-        setMyFacilities(
-          myFacilitiesData.map((row: any) => row.facilities).filter(Boolean),
-        );
-      }
-      setLoading(false);
+    if (error) {
+      console.error("Error fetching all facilities: ", error);
+    } else {
+      setAllFacilities(data);
     }
+    setAllFacilitiesLoading(false);
+  }
 
-    loadFacilities(); // useEffect can't take loadFacilities directly because it is async
+  async function loadMyFacilities() {
+    if (!userId) {
+      setMyFacilities([]);
+      setMyFacilitiesLoading(false);
+      return;
+    }
+    const { data, error } = await supabase
+      .from("memberships")
+      .select("facilities(*)")
+      .eq("user_id", userId);
+
+    if (error) {
+      console.error("Error fetching my facilities: ", error);
+    } else {
+      const myFacilitiesData = data ?? [];
+      // Convert from [{facilities: {...}}, {facilities: {...}} to [{...}, {...}]
+      setMyFacilities(
+        myFacilitiesData.map((row: any) => row.facilities).filter(Boolean),
+      );
+    }
+    setMyFacilitiesLoading(false);
+  }
+
+  useEffect(() => {
+    loadAllFacilities();
   }, []);
 
-  if (loading) {
+  useEffect(() => {
+    loadMyFacilities();
+  }, [userId]);
+
+  useEffect(() => {
+    if (!userId) return;
+    
+    const channel = supabase
+      .channel("myFacilitiesMembership")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "memberships",
+        },
+        () => {
+          loadMyFacilities();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId]);
+
+  if (allFacilitiesLoading || myFacilitiesLoading) {
     return <p>Loading facilities...</p>;
   }
 
