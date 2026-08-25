@@ -161,7 +161,7 @@ function Facility() {
           {MembershipButton()}
         </header>
 
-        <div>
+        <div className="leaderboard-header">
           <h2>Leaderboard</h2>
           <span>{leaderboard.length} members</span>
         </div>

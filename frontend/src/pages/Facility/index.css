@@ -5,7 +5,7 @@
 
 .facility-page .card {
   width: 100%;
-  max-width: 720px;
+  max-width: 720px; /*960px*/
 }
 
 .header {
@@ -50,7 +50,15 @@
   box-shadow: var(--green-btn-shadow);
 }
 
+.facility-page .join-btn:hover {
+  background-image: var(--green-gradient-highlight);
+}
+
 .facility-page .leave-btn {
   background-image: var(--gray-gradient);
   box-shadow: var(--gray-btn-shadow);
+}
+
+.facility-page .leave-btn:hover {
+  background-image: var(--gray-gradient-highlight);
 }
