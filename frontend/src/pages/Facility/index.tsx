@@ -46,37 +46,38 @@ function Facility() {
   }, [facilityId]);
 
   // Load leaderboard
-  useEffect(() => {
-    async function loadLeaderboard() {
-      setLeaderboardLoading(true);
-      if (!facilityId) {
-        setLeaderboardLoading(false);
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from("facility_leaderboard")
-        .select("*")
-        .eq("facility_id", facilityId);
-
-      if (error) {
-        console.error("Error fetching leaderboard: ", error);
-      } else {
-        setLeaderboard(data);
-      }
+  async function loadLeaderboard() {
+    setLeaderboardLoading(true);
+    if (!facilityId) {
       setLeaderboardLoading(false);
+      return;
     }
 
+    const { data, error } = await supabase
+      .from("facility_leaderboard")
+      .select("*")
+      .eq("facility_id", facilityId);
+
+    if (error) {
+      console.error("Error fetching leaderboard: ", error);
+    } else {
+      setLeaderboard(data);
+    }
+    setLeaderboardLoading(false);
+  }
+
+  useEffect(() => {
     loadLeaderboard();
   }, [facilityId]);
 
+  // Render loading or not found state
   if (facilityLoading || leaderboardLoading) {
     return <p>Loading page...</p>;
   } else if (!facilityLoading && !facility) {
     return <p>Facility not found.</p>;
   }
 
-  // Button that switches between "Join Facility" and "Leave Facility"
+  // Toggling button to handle "Join Facility" and "Leave Facility"
   function joinFacility() {
     alert("join");
   }

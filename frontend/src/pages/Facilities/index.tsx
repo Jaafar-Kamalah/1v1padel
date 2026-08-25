@@ -15,17 +15,6 @@ function Facilities() {
   const { session } = useAuthContext();
   const userId = session?.user?.id;
 
-  async function loadAllFacilities() {
-    const { data, error } = await supabase.from("facilities").select("*");
-
-    if (error) {
-      console.error("Error fetching all facilities: ", error);
-    } else {
-      setAllFacilities(data);
-    }
-    setAllFacilitiesLoading(false);
-  }
-
   async function loadMyFacilities() {
     if (!userId) {
       setMyFacilities([]);
@@ -50,6 +39,16 @@ function Facilities() {
   }
 
   useEffect(() => {
+    async function loadAllFacilities() {
+      const { data, error } = await supabase.from("facilities").select("*");
+
+      if (error) {
+        console.error("Error fetching all facilities: ", error);
+      } else {
+        setAllFacilities(data);
+      }
+      setAllFacilitiesLoading(false);
+    }
     loadAllFacilities();
   }, []);
 
@@ -59,7 +58,7 @@ function Facilities() {
 
   useEffect(() => {
     if (!userId) return;
-    
+
     const channel = supabase
       .channel("myFacilitiesMembership")
       .on(
