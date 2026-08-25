@@ -2,8 +2,8 @@
   border-radius: var(--radius);
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background-image: var(--dark-gradient);
-  box-shadow: var(--box-shadow);
+  background-image: var(--gray-gradient);
+  box-shadow: var(--card-shadow);
 }
 
 .fac-card:hover {

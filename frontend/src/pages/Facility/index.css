@@ -1,0 +1,56 @@
+.facility-page {
+  display: flex;
+  justify-content: center;
+}
+
+.facility-page .card {
+  width: 100%;
+  max-width: 720px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--light-text-color);
+  margin-bottom: 28px;
+}
+
+.facility-page h1 {
+  margin: 0;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.facility-page .header-text {
+  text-align: left;
+  width: 70%;
+}
+
+.facility-page .address {
+  color: var(--light-text-color);
+  padding: 0px;
+  font-size: 16px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.facility-page .header button {
+  border-radius: var(--radius);
+  height: 36px;
+  width: 80px;
+  font-weight: 600;
+  box-shadow: stretch;
+  text-shadow: var(--text-shadow);
+}
+
+.facility-page .join-btn {
+  background-image: var(--green-gradient);
+  box-shadow: var(--green-btn-shadow);
+}
+
+.facility-page .leave-btn {
+  background-image: var(--gray-gradient);
+  box-shadow: var(--gray-btn-shadow);
+}

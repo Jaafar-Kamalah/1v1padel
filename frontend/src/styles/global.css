@@ -1,5 +1,4 @@
 /* @import "tailwindcss"; */
-
 /* =========================
    Theme variables
    ========================= */
@@ -14,18 +13,31 @@
     rgb(93, 153, 72) 100%
   );
 
-  --dark-gradient: linear-gradient(
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.05) 100%
+  --gray-gradient: linear-gradient(
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.07) 100%
   );
 
-  --box-shadow:
+  --card-shadow:
     rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset,
     rgba(0, 0, 0, 0.14) 0px 1px 2px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
 
-  --text-shadow: rgba(0, 0, 0, 0.1) 0px 1px 0px;
+  --green-btn-shadow:
+    color(srgb 0.698039 0.878431 0.407843 / 0.4) 0px 1px 0px 0px inset,
+    rgb(69, 117, 60) 0px -1px 0px 0px inset,
+    color(srgb 0.698039 0.878431 0.407843 / 0.5) 0px 2px 4px 0px inset,
+    color(srgb 0.270588 0.458824 0.235294 / 0.5) 0px -2px 4px 0px inset,
+    rgba(0, 0, 0, 0.14) 0px 1px 2px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+
+  --gray-btn-shadow:
+    rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset,
+    rgba(0, 0, 0, 0.14) 0px 1px 2px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+
+  --text-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px;
 
   --text-color: rgba(255, 255, 255, 0.9);
+
+  --light-text-color: rgba(255, 255, 255, 0.5);
 
   --radius: 10px;
 }
@@ -43,7 +55,18 @@ body {
   background: var(--background);
   color: var(--foreground);
   min-height: 100vh;
-  font-family: "Roboto", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   line-height: 1.4;
   margin: 0;
   color: var(--text-color);
@@ -71,7 +94,10 @@ a {
   box-sizing: border-box;
 }
 
-button, input, select, textarea {
+button,
+input,
+select,
+textarea {
   background: none;
   font: inherit;
   border: none;
@@ -96,17 +122,17 @@ button, input, select, textarea {
 }
 
 .input-group input {
-    background-color: rgba(255, 255, 255, 0.08);
-    width: 100%;
-    padding: 5px;
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  padding: 5px;
 }
 
 .input-group select {
-    background-color: rgba(255, 255, 255, 0.08);
-    width: 100%;
-    padding: 5px;
+  background-color: rgba(255, 255, 255, 0.08);
+  width: 100%;
+  padding: 5px;
 }
 
 .input-group select option {
-    background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
 }

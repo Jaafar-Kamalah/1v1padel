@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import type { Database } from "../../../../supabase/types";
 import supabase from "../../lib/supabase";
 import { useAuthContext } from "../../contexts/AuthContext";
+import "./index.css";
 
 type Facility = Database["public"]["Tables"]["facilities"]["Row"];
 type LeaderboardEntry =
@@ -142,18 +143,35 @@ function Facility() {
       return <button disabled>Loading…</button>;
     }
     if (joinedEntry) {
-      return <button onClick={leaveFacility}>Leave Facility</button>;
+      return <button className="leave-btn" onClick={leaveFacility}>Leave</button>;
     }
-    return <button onClick={joinFacility}>Join Facility</button>;
+    return <button className="join-btn" onClick={joinFacility}>Join</button>;
   }
 
   return (
     <div className="facility-page">
-      <h1>{facility?.name}</h1>
-      {MembershipButton()}
-      {leaderboard.map((l) => (
-        <p key={l.user_id}>{l.first_name}</p>
-      ))}
+      <div className="card">
+        <header className="header">
+          <div className="header-text">
+            <h1>{facility?.name}</h1>
+            <div className="address">
+              <span>{facility?.address}</span>
+            </div>
+          </div>
+          {MembershipButton()}
+        </header>
+
+        <div>
+          <h2>Leaderboard</h2>
+          <span>{leaderboard.length} members</span>
+        </div>
+
+        <div>
+          {leaderboard.map((l) => (
+            <p key={l.user_id}>{l.first_name}</p>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
