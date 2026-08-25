@@ -54,7 +54,7 @@ function App() {
           }
         />
         <Route
-          path="/facility/:id"
+          path="/facility/:facilityId"
           element={
             <PrivateRoute>
               <Facility />
