@@ -67,6 +67,7 @@ function Facilities() {
           event: "*",
           schema: "public",
           table: "memberships",
+          filter: `user_id=eq.${userId}`,
         },
         () => {
           loadMyFacilities();

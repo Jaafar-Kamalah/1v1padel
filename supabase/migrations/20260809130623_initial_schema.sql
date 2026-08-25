@@ -39,6 +39,9 @@ create table public.memberships (
   unique (user_id, facility_id)
 );
 
+-- Set replica identity for realtime updates
+alter table public.memberships replica identity full;
+
 -- ============================================================
 -- TABLE: challenges (user challenges another user)
 -- ============================================================

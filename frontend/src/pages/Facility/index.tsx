@@ -48,7 +48,8 @@ function Facility() {
   // Load leaderboard
   async function loadLeaderboard() {
     setLeaderboardLoading(true);
-    if (!facilityId) {
+    // facility_leaderboard requires a facilityId and session token to access
+    if (!facilityId || !userId) {
       setLeaderboardLoading(false);
       return;
     }
@@ -68,7 +69,32 @@ function Facility() {
 
   useEffect(() => {
     loadLeaderboard();
-  }, [facilityId]);
+  }, [facilityId, userId]);
+
+  // Live update leaderboard when a membership is inserted or deleted
+  useEffect(() => {
+    if (!facilityId || !userId) return;
+
+    const channel = supabase
+      .channel("leaderboard")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "memberships",
+          filter: `facility_id=eq.${facilityId}`,
+        },
+        () => {
+          loadLeaderboard();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [facilityId, userId]);
 
   // Render loading or not found state
   if (facilityLoading || leaderboardLoading) {
