@@ -19,6 +19,8 @@ function Facility() {
   const [leaderboardLoading, setLeaderboardLoading] = useState(true);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
 
+  const [membershipActionLoading, setMembershipActionLoading] = useState(false);
+
   // Load facility
   useEffect(() => {
     async function loadFacility() {
@@ -104,12 +106,34 @@ function Facility() {
   }
 
   // Toggling button to handle "Join Facility" and "Leave Facility"
-  function joinFacility() {
-    alert("join");
+  async function joinFacility() {
+    if (!facilityId || !userId || membershipActionLoading) return;
+
+    setMembershipActionLoading(true);
+    const { error } = await supabase
+      .from("memberships")
+      .insert({ facility_id: facilityId, user_id: userId });
+
+    if (error) {
+      console.error("Error joining facility: ", error);
+    }
+    setMembershipActionLoading(false);
   }
 
-  function leaveFacility() {
-    alert("leave");
+  async function leaveFacility() {
+    if (!facilityId || !userId || membershipActionLoading) return;
+
+    setMembershipActionLoading(true);
+    const { error } = await supabase
+      .from("memberships")
+      .delete()
+      .eq("facility_id", facilityId)
+      .eq("user_id", userId);
+
+    if (error) {
+      console.error("Error leaving facility: ", error);
+    }
+    setMembershipActionLoading(false);
   }
 
   const joinedEntry = leaderboard.find((l) => l.user_id === userId);
@@ -118,9 +142,9 @@ function Facility() {
       return <button disabled>Loading…</button>;
     }
     if (joinedEntry) {
-      return <button onClick={joinFacility}>Leave Facility</button>;
+      return <button onClick={leaveFacility}>Leave Facility</button>;
     }
-    return <button onClick={leaveFacility}>Join Facility</button>;
+    return <button onClick={joinFacility}>Join Facility</button>;
   }
 
   return (
