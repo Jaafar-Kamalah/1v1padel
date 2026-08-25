@@ -2,19 +2,24 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { Database } from "../../../../supabase/types";
 import supabase from "../../lib/supabase";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 type Facility = Database["public"]["Tables"]["facilities"]["Row"];
 type LeaderboardEntry =
   Database["public"]["Views"]["facility_leaderboard"]["Row"];
 
 function Facility() {
+  const { session } = useAuthContext();
+  const userId = session?.user?.id;
   const { facilityId } = useParams();
 
   const [facilityLoading, setFacilityLoading] = useState(true);
-  const [leaderboardLoading, setLeaderboardLoading] = useState(true);
   const [facility, setFacility] = useState<Facility | null>(null);
+
+  const [leaderboardLoading, setLeaderboardLoading] = useState(true);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
 
+  // Load facility
   useEffect(() => {
     async function loadFacility() {
       setFacilityLoading(true);
@@ -40,6 +45,7 @@ function Facility() {
     loadFacility();
   }, [facilityId]);
 
+  // Load leaderboard
   useEffect(() => {
     async function loadLeaderboard() {
       setLeaderboardLoading(true);
@@ -70,9 +76,30 @@ function Facility() {
     return <p>Facility not found.</p>;
   }
 
+  // Button that switches between "Join Facility" and "Leave Facility"
+  function joinFacility() {
+    alert("join");
+  }
+
+  function leaveFacility() {
+    alert("leave");
+  }
+
+  const joinedEntry = leaderboard.find((l) => l.user_id === userId);
+  function MembershipButton() {
+    if (leaderboardLoading) {
+      return <button disabled>Loading…</button>;
+    }
+    if (joinedEntry) {
+      return <button onClick={joinFacility}>Leave Facility</button>;
+    }
+    return <button onClick={leaveFacility}>Join Facility</button>;
+  }
+
   return (
     <div className="facility-page">
       <h1>{facility?.name}</h1>
+      {MembershipButton()}
       {leaderboard.map((l) => (
         <p key={l.user_id}>{l.first_name}</p>
       ))}
