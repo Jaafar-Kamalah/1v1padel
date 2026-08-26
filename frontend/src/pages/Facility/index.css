@@ -8,13 +8,15 @@
   max-width: 720px; /*960px*/
 }
 
+/* ---------- Header section ---------- */
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding-bottom: 18px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--light-text-color);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .facility-page h1 {
@@ -45,6 +47,8 @@
   text-shadow: var(--text-shadow);
 }
 
+/* ---------- Button section ---------- */
+
 .facility-page .join-btn {
   background-image: var(--green-gradient);
   box-shadow: var(--green-btn-shadow);
@@ -61,4 +65,21 @@
 
 .facility-page .leave-btn:hover {
   background-image: var(--gray-gradient-highlight);
+}
+
+/* ---------- Leaderboard header section ---------- */
+.facility-page .leaderboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.facility-page .leaderboard-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.facility-page .leaderboard-header span {
+    font-size: 16px;
+    color: var(--light-text-color);
 }
