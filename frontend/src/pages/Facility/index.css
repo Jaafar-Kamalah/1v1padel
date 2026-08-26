@@ -94,7 +94,7 @@
   border-bottom: none;
 }
 
-.row.me {
+.facility-page .row.me {
     background: var(--green-tint);
   }
 
@@ -133,7 +133,7 @@
 
 /* ---------- First, second and third place  ---------- */
 
-  .row::before {
+  .facility-page .row::before {
     content: "";
     position: absolute;
     left: 0;
@@ -141,10 +141,10 @@
     bottom: 0;
     width: 3px;
   }
-  .row[data-rank="1"]::before { background: var(--gold); }
-  .row[data-rank="2"]::before { background: var(--silver); }
-  .row[data-rank="3"]::before { background: var(--bronze); }
+  .facility-page .row[data-rank="1"]::before { background: var(--gold); }
+  .facility-page .row[data-rank="2"]::before { background: var(--silver); }
+  .facility-page .row[data-rank="3"]::before { background: var(--bronze); }
 
-  .row[data-rank="1"] .rank { color: var(--gold); }
-  .row[data-rank="2"] .rank { color: var(--silver); }
-  .row[data-rank="3"] .rank { color: var(--bronze); }
+  .facility-page .row[data-rank="1"] .rank { color: var(--gold); }
+  .facility-page .row[data-rank="2"] .rank { color: var(--silver); }
+  .facility-page .row[data-rank="3"] .rank { color: var(--bronze); }
