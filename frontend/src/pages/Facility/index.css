@@ -39,47 +39,46 @@
 }
 
 .facility-page .header button {
-  border-radius: var(--radius);
   height: 36px;
   width: 80px;
   font-weight: 600;
-  box-shadow: stretch;
-  text-shadow: var(--text-shadow);
 }
 
-/* ---------- Button section ---------- */
-
-.facility-page .join-btn {
-  background-image: var(--green-gradient);
-  box-shadow: var(--green-btn-shadow);
+/* ---------- Leaderboard title section ---------- */
+.facility-page .leaderboard-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
-.facility-page .join-btn:hover {
-  background-image: var(--green-gradient-highlight);
+.facility-page .leaderboard-title h2 {
+  margin: 0;
+  font-size: 24px;
 }
 
-.facility-page .leave-btn {
+.facility-page .leaderboard-title span {
+  font-size: 16px;
+  color: var(--light-text-color);
+}
+
+/* ---------- Leaderboard head section ---------- */
+.facility-page .leaderboard {
+  margin-top: 10px;
+  border-radius: var(--radius);
+  background-color: var(--darker-bg);
+  overflow: hidden;
+}
+
+.facility-page .leaderboard-head {
+  display: grid;
+  grid-template-columns: 15% 35% 25% 25%;
+  color: var(--light-text-color);
+  font-size: 18px;
   background-image: var(--gray-gradient);
-  box-shadow: var(--gray-btn-shadow);
 }
 
-.facility-page .leave-btn:hover {
-  background-image: var(--gray-gradient-highlight);
-}
-
-/* ---------- Leaderboard header section ---------- */
-.facility-page .leaderboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-}
-
-.facility-page .leaderboard-header h2 {
-    margin: 0;
-    font-size: 24px;
-}
-
-.facility-page .leaderboard-header span {
-    font-size: 16px;
-    color: var(--light-text-color);
+/* ---------- Leaderboard body section ---------- */
+.facility-page .row {
+  display: grid;
+  grid-template-columns: 15% 35% 25% 25%;
 }

@@ -8,7 +8,7 @@
 }
 
 .home-page .fac-grid-container {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--darker-bg);
   padding: 1rem;
   margin: 1rem 2rem;
   border-radius: var(--radius);

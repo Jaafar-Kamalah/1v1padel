@@ -143,9 +143,17 @@ function Facility() {
       return <button disabled>Loading…</button>;
     }
     if (joinedEntry) {
-      return <button className="leave-btn" onClick={leaveFacility}>Leave</button>;
+      return (
+        <button className="leave-btn gray-btn" onClick={leaveFacility}>
+          Leave
+        </button>
+      );
     }
-    return <button className="join-btn" onClick={joinFacility}>Join</button>;
+    return (
+      <button className="join-btn green-btn" onClick={joinFacility}>
+        Join
+      </button>
+    );
   }
 
   return (
@@ -161,14 +169,25 @@ function Facility() {
           {MembershipButton()}
         </header>
 
-        <div className="leaderboard-header">
+        <div className="leaderboard-title">
           <h2>Leaderboard</h2>
           <span>{leaderboard.length} members</span>
         </div>
 
-        <div>
-          {leaderboard.map((l) => (
-            <p key={l.user_id}>{l.first_name}</p>
+        <div className="leaderboard">
+          <div className="leaderboard-head">
+            <span>Rank</span>
+            <span>Name</span>
+            <span>Rating</span>
+            <span></span>
+          </div>
+          {leaderboard.map((l, i) => (
+            <div key={l.user_id} className="row">
+              <div className="rank">{i+1}</div>
+              <div className="name">{l.first_name} {l.last_name}</div>
+              <div className="rating">{l.rating}</div>
+              <div className="challenge"><button className="green-btn">Challenge</button></div>
+            </div>
           ))}
         </div>
       </div>
