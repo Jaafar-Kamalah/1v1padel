@@ -67,18 +67,84 @@
   border-radius: var(--radius);
   background-color: var(--darker-bg);
   overflow: hidden;
+  border: 1px solid var(--gray-line);
 }
 
 .facility-page .leaderboard-head {
   display: grid;
-  grid-template-columns: 15% 35% 25% 25%;
+  grid-template-columns: 15% 40% 20% 25%;
+  align-items: center;
+  height: 35px;
   color: var(--light-text-color);
   font-size: 18px;
   background-image: var(--gray-gradient);
 }
 
-/* ---------- Leaderboard body section ---------- */
+/* ---------- Leaderboard rows  ---------- */
 .facility-page .row {
   display: grid;
-  grid-template-columns: 15% 35% 25% 25%;
+  grid-template-columns: 15% 40% 20% 25%;
+  height: 40px;
+  align-items: center;
+  border-bottom: 1px solid var(--gray-line);
+  position: relative;
 }
+
+.facility-page .row:last-child {
+  border-bottom: none;
+}
+
+.row.me {
+    background: var(--green-tint);
+  }
+
+/* ---------- Row values  ---------- */
+
+
+.facility-page .blocked-challange {
+  color: var(--light-text-color);
+}
+
+.facility-page .rank {
+  color: var(--light-text-color);
+  font-family: monospace;
+  font-weight: 1000;
+  font-size: 24px;
+}
+
+.facility-page .rating {
+  font-family: monospace;
+  font-weight: 600;
+}
+
+.facility-page .name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+.facility-page .challenge-btn {
+  height: 28px;
+  width: 90px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* ---------- First, second and third place  ---------- */
+
+  .row::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+  }
+  .row[data-rank="1"]::before { background: var(--gold); }
+  .row[data-rank="2"]::before { background: var(--silver); }
+  .row[data-rank="3"]::before { background: var(--bronze); }
+
+  .row[data-rank="1"] .rank { color: var(--gold); }
+  .row[data-rank="2"] .rank { color: var(--silver); }
+  .row[data-rank="3"] .rank { color: var(--bronze); }

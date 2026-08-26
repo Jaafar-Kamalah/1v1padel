@@ -49,6 +49,8 @@
     rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset,
     rgba(0, 0, 0, 0.14) 0px 1px 2px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
 
+  --gray-line: rgba(255, 255, 255, 0.2);
+
   --text-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px;
 
   --text-color: rgba(255, 255, 255, 0.9);
@@ -56,6 +58,12 @@
   --light-text-color: rgba(255, 255, 255, 0.5);
 
   --radius: 10px;
+
+  --gold: #e3b341;
+  --silver: #b9c0cf;
+  --bronze: #c98a4b;
+
+  --green-tint: rgba(129, 182, 76, 0.15)
 }
 
 /* =========================

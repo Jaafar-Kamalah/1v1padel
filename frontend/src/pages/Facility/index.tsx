@@ -179,14 +179,29 @@ function Facility() {
             <span>Rank</span>
             <span>Name</span>
             <span>Rating</span>
-            <span></span>
+            <span>Play</span>
           </div>
           {leaderboard.map((l, i) => (
-            <div key={l.user_id} className="row">
-              <div className="rank">{i+1}</div>
-              <div className="name">{l.first_name} {l.last_name}</div>
+            <div
+              key={l.user_id}
+              className={l === joinedEntry ? "row me" : "row"}
+              data-rank={i + 1}
+            >
+              <div className="rank">{i + 1}</div>
+
+              <div className="name">
+                {l.first_name} {l.last_name}
+              </div>
+
               <div className="rating">{l.rating}</div>
-              <div className="challenge"><button className="green-btn">Challenge</button></div>
+
+              {l === joinedEntry ? (
+                <div className="blocked-challange">-</div>
+              ) : (
+                <div className="challenge">
+                  <button className="challenge-btn green-btn">Challenge</button>
+                </div>
+              )}
             </div>
           ))}
         </div>
