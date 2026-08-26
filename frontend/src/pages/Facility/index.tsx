@@ -4,6 +4,7 @@ import type { Database } from "../../../../supabase/types";
 import supabase from "../../lib/supabase";
 import { useAuthContext } from "../../contexts/AuthContext";
 import "./index.css";
+import ChallengePopup from "./ChallengePopup";
 
 type Facility = Database["public"]["Tables"]["facilities"]["Row"];
 type LeaderboardEntry =
@@ -21,6 +22,8 @@ function Facility() {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
 
   const [membershipActionLoading, setMembershipActionLoading] = useState(false);
+
+  const [challenge, setChallenge] = useState<LeaderboardEntry | null>(null);
 
   // Load facility
   useEffect(() => {
@@ -199,13 +202,16 @@ function Facility() {
                 <div className="blocked-challange">-</div>
               ) : (
                 <div className="challenge">
-                  <button className="challenge-btn green-btn">Challenge</button>
+                  <button className="challenge-btn green-btn" onClick={() => setChallenge(l)}>Challenge</button>
                 </div>
               )}
             </div>
           ))}
         </div>
       </div>
+      {challenge && (
+        <ChallengePopup onClose={() => setChallenge(null)}/>
+      )}
     </div>
   );
 }
