@@ -48,6 +48,8 @@ function ChallengePopup({ onClose, challenged }: Props) {
     });
 
     if (challengeError) {
+      // TODO: use rpc to do both inserts at the same time so that if challenge insertion
+      // succeeds but message insertion fails no orphaned challenge exists
       console.error("Error sending message: ", messageError);
       return;
     }

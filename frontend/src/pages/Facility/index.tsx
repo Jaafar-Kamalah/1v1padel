@@ -103,9 +103,9 @@ function Facility() {
   }, [facilityId, userId]);
 
   // Render loading or not found state
-  if (facilityLoading || leaderboardLoading) {
+  if (facilityLoading) {
     return <p>Loading page...</p>;
-  } else if (!facilityLoading && !facility) {
+  } else if (!facility) {
     return <p>Facility not found.</p>;
   }
 
@@ -140,6 +140,7 @@ function Facility() {
     setMembershipActionLoading(false);
   }
 
+  // TODO: Double clicking join/leave fast enough still sends a second request
   const joinedEntry = leaderboard.find((l) => l.user_id === userId);
   function MembershipButton() {
     if (leaderboardLoading) {
@@ -147,13 +148,21 @@ function Facility() {
     }
     if (joinedEntry) {
       return (
-        <button className="leave-btn gray-btn" onClick={leaveFacility}>
+        <button
+          className="leave-btn gray-btn"
+          disabled={membershipActionLoading}
+          onClick={leaveFacility}
+        >
           Leave
         </button>
       );
     }
     return (
-      <button className="join-btn green-btn" onClick={joinFacility}>
+      <button
+        className="join-btn green-btn"
+        disabled={membershipActionLoading}
+        onClick={joinFacility}
+      >
         Join
       </button>
     );
@@ -202,7 +211,12 @@ function Facility() {
                 <div className="blocked-challange">-</div>
               ) : (
                 <div className="challenge">
-                  <button className="challenge-btn green-btn" onClick={() => setChallenge(l)}>Challenge</button>
+                  <button
+                    className="challenge-btn green-btn"
+                    onClick={() => setChallenge(l)}
+                  >
+                    Challenge
+                  </button>
                 </div>
               )}
             </div>
@@ -210,7 +224,10 @@ function Facility() {
         </div>
       </div>
       {challenge && (
-        <ChallengePopup onClose={() => setChallenge(null)} challenged={challenge}/>
+        <ChallengePopup
+          onClose={() => setChallenge(null)}
+          challenged={challenge}
+        />
       )}
     </div>
   );
