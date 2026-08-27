@@ -210,7 +210,7 @@ function Facility() {
         </div>
       </div>
       {challenge && (
-        <ChallengePopup onClose={() => setChallenge(null)}/>
+        <ChallengePopup onClose={() => setChallenge(null)} challenged={challenge}/>
       )}
     </div>
   );

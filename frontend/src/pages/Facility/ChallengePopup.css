@@ -10,10 +10,11 @@
 
 .challenge-backdrop .challenge-card {
     position: relative;
-    background-color: var(--dark-grey);
+    background-color: var(--dark-gray);
     width: 374px;
     height: 496px;
     border-radius: var(--radius);
+    box-shadow: var(--popup-shadow);
 }
 
 .challenge-backdrop .close {
