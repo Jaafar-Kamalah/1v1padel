@@ -60,16 +60,32 @@ function ChallengePopup({ onClose, challenged }: Props) {
     <div className="challenge-backdrop" onClick={onClose}>
       <div className="challenge-card" onClick={(e) => e.stopPropagation()}>
         <button className="close" onClick={onClose}>
-          X
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 6L18 18M18 6L6 18"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </svg>
         </button>
         <h2>Challenge Message</h2>
-        <textarea
-          className="modal-textarea"
-          placeholder="Say hi, and let them know when you're free to play..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          rows={4}
-        />
+        <div className="input-group">
+          <textarea
+            className="modal-textarea"
+            placeholder="Say hi, and let them know when you're free to play..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            rows={4}
+          />
+        </div>
+
         <button
           className="modal-send-btn green-btn"
           onClick={() => onSend(message)}

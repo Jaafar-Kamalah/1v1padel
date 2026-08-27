@@ -15,7 +15,7 @@
   justify-content: space-between;
   align-items: flex-start;
   padding-bottom: 20px;
-  border-bottom: 1px solid var(--light-text-color);
+  border-bottom: 1px solid var(--gray-text-color);
   margin-bottom: 20px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .facility-page .address {
-  color: var(--light-text-color);
+  color: var(--gray-text-color);
   padding: 0px;
   font-size: 16px;
   margin-top: 5px;
@@ -41,7 +41,6 @@
 .facility-page .header button {
   height: 36px;
   width: 80px;
-  font-weight: 600;
 }
 
 /* ---------- Leaderboard title section ---------- */
@@ -49,6 +48,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  padding: 0 2px;
 }
 
 .facility-page .leaderboard-title h2 {
@@ -58,7 +58,7 @@
 
 .facility-page .leaderboard-title span {
   font-size: 16px;
-  color: var(--light-text-color);
+  color: var(--gray-text-color);
 }
 
 /* ---------- Leaderboard head section ---------- */
@@ -75,7 +75,7 @@
   grid-template-columns: 15% 40% 20% 25%;
   align-items: center;
   height: 35px;
-  color: var(--light-text-color);
+  color: var(--gray-text-color);
   font-size: 18px;
   background-image: var(--gray-gradient);
 }
@@ -102,11 +102,11 @@
 
 
 .facility-page .blocked-challange {
-  color: var(--light-text-color);
+  color: var(--gray-text-color);
 }
 
 .facility-page .rank {
-  color: var(--light-text-color);
+  color: var(--gray-text-color);
   font-family: monospace;
   font-weight: 1000;
   font-size: 24px;
@@ -128,7 +128,6 @@
   height: 28px;
   width: 90px;
   font-size: 16px;
-  font-weight: 600;
 }
 
 /* ---------- First, second and third place  ---------- */

@@ -37,7 +37,7 @@
   --popup-shadow:
     rgba(0, 0, 0, 0.65) 0px 8px 24px 0px,
     rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
-    
+
   --green-btn-shadow:
     color(srgb 0.698039 0.878431 0.407843 / 0.4) 0px 1px 0px 0px inset,
     rgb(69, 117, 60) 0px -1px 0px 0px inset,
@@ -52,13 +52,14 @@
   --text-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px;
 
   --text-color: rgba(255, 255, 255, 0.9);
-  --light-text-color: rgba(255, 255, 255, 0.5);
+  --gray-text-color: rgba(255, 255, 255, 0.5);
 
   --gold: #e3b341;
   --silver: #b9c0cf;
   --bronze: #c98a4b;
   --dark-gray: rgb(38, 36, 33);
   --light-gray: rgba(255, 255, 255, 0.2);
+  --soft-white: rgba(255, 255, 255, 0.72);
   --green-tint: rgba(129, 182, 76, 0.15);
 
   --radius: 10px;
@@ -126,10 +127,6 @@ textarea {
   color: white;
 }
 
-::placeholder {
-  color: #9ca3af;
-}
-
 /* =========================
    Reusable Class styles
    ========================= */
@@ -140,6 +137,10 @@ textarea {
 }
 
 /* ---------- Input section ---------- */
+
+::placeholder {
+  color: rgba(255,255,255,0.4);
+}
 
 .input-group {
   margin-bottom: 20px;
@@ -161,12 +162,23 @@ textarea {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
+.input-group textarea {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-bottom-color: rgba(0, 0, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  color: var(--soft-white);
+  resize: none;
+  padding: 8px;
+}
+
 /* ---------- Button section ---------- */
 
 .green-btn,
 .gray-btn {
   border-radius: var(--radius);
   text-shadow: var(--text-shadow);
+  font-weight: 600;
 }
 
 .green-btn {
@@ -174,7 +186,7 @@ textarea {
   box-shadow: var(--green-btn-shadow);
 }
 
-.green-btn:hover {
+.green-btn:hover:not(:disabled) {
   background-image: var(--green-gradient-highlight);
 }
 
