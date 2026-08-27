@@ -139,7 +139,7 @@ textarea {
 /* ---------- Input section ---------- */
 
 ::placeholder {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .input-group {
@@ -184,6 +184,11 @@ textarea {
 .green-btn {
   background-image: var(--green-gradient);
   box-shadow: var(--green-btn-shadow);
+}
+
+.green-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .green-btn:hover:not(:disabled) {

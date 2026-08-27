@@ -44,12 +44,3 @@
   width: 100%;
   height: 40px;
 }
-
-.challenge-backdrop .green-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.challenge-backdrop .green-btn:disabled:hover {
-    
-}

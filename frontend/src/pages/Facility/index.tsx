@@ -213,6 +213,7 @@ function Facility() {
                 <div className="challenge">
                   <button
                     className="challenge-btn green-btn"
+                    disabled={!joinedEntry}
                     onClick={() => setChallenge(l)}
                   >
                     Challenge
