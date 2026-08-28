@@ -3,15 +3,19 @@ import "./styles/global.css";
 import Facilities from "./pages/Facilities";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Chat from "./pages/Chat";
+import Challenges from "./pages/Challenges";
 import Profile from "./pages/Profile";
 import Facility from "./pages/Facility";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
+import Navbar from "./components/Navbar";
+
+
 
 function App() {
   return (
     <>
+    <Navbar/>
       <Routes>
         <Route
           path="/login"
@@ -38,10 +42,10 @@ function App() {
           }
         />
         <Route
-          path="/chat"
+          path="/challenges"
           element={
             <PrivateRoute>
-              <Chat />
+              <Challenges />
             </PrivateRoute>
           }
         />

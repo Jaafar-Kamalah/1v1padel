@@ -1,0 +1,13 @@
+.nav {
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 18px;
+  align-items: center;
+}
+
+.nav ul {
+    display: flex;
+    gap: 18px;
+    list-style: none;
+}
