@@ -22,11 +22,13 @@
   position: absolute;
   top: 14px;
   right: 10px;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255);
+  opacity: 0.4;
 }
 
 .challenge-backdrop .close:hover {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255);
+  opacity: 0.5;
 }
 
 .challenge-backdrop h2 {
