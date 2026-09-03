@@ -3,11 +3,15 @@
   display: flex;
   justify-content: space-between;
   padding: 0 18px;
-  align-items: center;
 }
 
 .nav ul {
     display: flex;
     gap: 18px;
     list-style: none;
+}
+
+.site-title {
+  display: flex;
+  align-items: center;
 }

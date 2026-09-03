@@ -6,7 +6,18 @@ function Navbar() {
   return (
     <nav className="nav">
       <Link to="/" className="site-title">
-        1v1Padel
+        <svg
+          className="wordmark"
+          width="180"
+          height="40"
+          viewBox="0 0 140 32"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <text x="0" y="22" fontSize="18" fontWeight="700" fill="#ffffff">
+            1v1
+            <tspan fill="rgb(169, 236, 102)">Padel</tspan>
+          </text>
+        </svg>
       </Link>
 
       <div className="nav-links">
