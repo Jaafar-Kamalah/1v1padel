@@ -8,7 +8,7 @@ function Navbar() {
 
   return (
     <nav className="nav">
-      <Link to="/" className="site-title">
+      <Link to="/" className="site-title" aria-label="Facilities">
         <svg
           className="wordmark"
           width="220"
@@ -23,34 +23,35 @@ function Navbar() {
         </svg>
       </Link>
       <div className="nav-links">
-        {session && (
+        {session ? (
           <ul className="logged-in-ul">
             <li>
-              <Link to="/">
+              <Link to="/" aria-label="Facilities">
                 <House className="icon" />
               </Link>
             </li>
             <li>
-              <Link to="/challenges">
+              <Link to="/challenges" aria-label="Challenges">
                 <MessageSquareText className="icon" />
               </Link>
             </li>
             <li>
-              <Link to="/profile">
+              <Link to="/profile" aria-label="Profile">
                 <User className="icon" />
               </Link>
             </li>
           </ul>
-        )}
-        {!session && (
+        ) : (
+          // TODO: hide "Register" link when already on register page and vice versa.
+          // Could be solved with active property using NavLink
           <ul className="logged-out-ul">
             <li>
-              <Link className="green-btn" to="/register">
+              <Link className="green-btn" to="/register" aria-label="Register">
                 Register
               </Link>
             </li>
             <li>
-              <Link className="gray-btn" to="/login">
+              <Link className="gray-btn" to="/login" aria-label="Login">
                 Log in
               </Link>
             </li>
