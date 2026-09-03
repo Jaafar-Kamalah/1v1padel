@@ -1,20 +1,30 @@
+/* ---------- Shared section ---------- */
 .nav {
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
-  padding: 0 22px;
+  padding: 8px 22px;
 }
 
 .nav ul {
   display: flex;
   gap: clamp(1rem, 3vw, 2rem);
   list-style: none;
+  height: 100%;
+  margin: 0;
+  padding: 6px 0;
 }
 
+.nav .site-title {
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- Logged in section ---------- */
 .nav .icon {
   width: 28px;
   height: 28px;
-  color: rgb(255,255,255);
+  color: rgb(255, 255, 255);
   opacity: 0.7;
 }
 
@@ -23,7 +33,22 @@
   opacity: 0.8;
 }
 
-.site-title {
+.nav .logged-in-ul {
   display: flex;
   align-items: center;
+}
+
+.nav .logged-in-ul a {
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- Logged out section ---------- */
+.nav .green-btn,
+.gray-btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100px;
 }

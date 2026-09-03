@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
-import "./Navbar.css"
+import "./Navbar.css";
 import { House, MessageSquareText, User } from "lucide-react";
+import { useAuthContext } from "../contexts/AuthContext";
 
 function Navbar() {
+  const { session } = useAuthContext();
+
   return (
     <nav className="nav">
       <Link to="/" className="site-title">
@@ -19,25 +22,40 @@ function Navbar() {
           </text>
         </svg>
       </Link>
-
       <div className="nav-links">
-        <ul>
-          <li>
-            <Link to="/">
-              <House className="icon" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/challenges">
-              <MessageSquareText className="icon" />
-            </Link>
-          </li>
-          <li>
-            <Link to="/profile">
-              <User className="icon" />
-            </Link>
-          </li>
-        </ul>
+        {session && (
+          <ul className="logged-in-ul">
+            <li>
+              <Link to="/">
+                <House className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/challenges">
+                <MessageSquareText className="icon" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/profile">
+                <User className="icon" />
+              </Link>
+            </li>
+          </ul>
+        )}
+        {!session && (
+          <ul className="logged-out-ul">
+            <li>
+              <Link className="green-btn" to="/register">
+                Register
+              </Link>
+            </li>
+            <li>
+              <Link className="gray-btn" to="/login">
+                Log in
+              </Link>
+            </li>
+          </ul>
+        )}
       </div>
     </nav>
   );
