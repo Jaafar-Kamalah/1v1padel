@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css"
-import { House } from "lucide-react";
+import { House, MessageSquareText, User } from "lucide-react";
 
 function Navbar() {
   return (
@@ -8,8 +8,8 @@ function Navbar() {
       <Link to="/" className="site-title">
         <svg
           className="wordmark"
-          width="180"
-          height="40"
+          width="220"
+          height="50"
           viewBox="0 0 140 32"
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -23,13 +23,19 @@ function Navbar() {
       <div className="nav-links">
         <ul>
           <li>
-            <Link to="/">Facilities</Link>
+            <Link to="/">
+              <House className="icon" />
+            </Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/challenges">
+              <MessageSquareText className="icon" />
+            </Link>
           </li>
           <li>
-            <Link to="/challenges">Challenges</Link>
+            <Link to="/profile">
+              <User className="icon" />
+            </Link>
           </li>
         </ul>
       </div>

@@ -2,13 +2,25 @@
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: space-between;
-  padding: 0 18px;
+  padding: 0 22px;
 }
 
 .nav ul {
-    display: flex;
-    gap: 18px;
-    list-style: none;
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  list-style: none;
+}
+
+.nav .icon {
+  width: 28px;
+  height: 28px;
+  color: rgb(255,255,255);
+  opacity: 0.7;
+}
+
+.nav .icon:hover {
+  color: rgba(255, 255, 255);
+  opacity: 0.8;
 }
 
 .site-title {
