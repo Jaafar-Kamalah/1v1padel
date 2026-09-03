@@ -1,3 +1,10 @@
+// TODO
+// *Use navlink to have active prop
+// *Make icons brighter if on active page
+// *Show only Login link when on register page and vice versa
+// *Add rating in middle of navbar and hide it if there is no room?
+
+
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { House, MessageSquareText, User } from "lucide-react";
@@ -42,8 +49,6 @@ function Navbar() {
             </li>
           </ul>
         ) : (
-          // TODO: hide "Register" link when already on register page and vice versa.
-          // Could be solved with active property using NavLink
           <ul className="logged-out-ul">
             <li>
               <Link className="green-btn" to="/register" aria-label="Register">
