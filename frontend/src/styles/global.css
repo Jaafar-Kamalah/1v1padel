@@ -53,6 +53,7 @@
 
   --text-color: rgba(255, 255, 255, 0.9);
   --gray-text-color: rgba(255, 255, 255, 0.5);
+  --gray-line: rgba(100, 100, 100, 0.8);
 
   --gold: #e3b341;
   --silver: #b9c0cf;
