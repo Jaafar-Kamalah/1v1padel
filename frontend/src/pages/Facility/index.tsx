@@ -141,6 +141,7 @@ function Facility() {
   }
 
   // TODO: Double clicking join/leave fast enough still sends a second request
+  // TODO: Joining a facility quickly after page render does not update page
   const joinedEntry = leaderboard.find((l) => l.user_id === userId);
   function MembershipButton() {
     if (leaderboardLoading) {

@@ -6,52 +6,66 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import supabase from "../../lib/supabase";
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
+type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+
+type ChallengeWithOpponent = {
+  challenge: Challenge;
+  opponent: Profile;
+};
 
 function Challenges() {
   const { session } = useAuthContext();
   const userId = session?.user?.id;
 
-  const [challenges, setChallenges] = useState<Challenge[]>([]);
+  const [challengesWithOpponent, setChallengesWithOpponent] = useState<ChallengeWithOpponent[]>([]);
   const [loading, setLoading] = useState(true);
 
-  async function loadChallenges() {
+  async function loadChallengesWithOpponent() {
     if (!userId) {
-      setChallenges([]);
+      setChallengesWithOpponent([]);
       setLoading(false);
       return;
     }
-    
+
+    // Get all user challenges and all involved user profiles
     const { data, error } = await supabase
       .from("challenges")
-      .select("*")
+      .select(
+        `*,
+      sender:profiles!sender_user_id(*),
+      receiver:profiles!receiver_user_id(*)`,
+      )
       .or(`sender_user_id.eq.${userId}, receiver_user_id.eq.${userId}`);
 
     if (error) {
       console.error("Error fetching challenges: ", error);
     } else {
-      setChallenges(data);
+      const formattedData = data.map(({ sender, receiver, ...challenge }) => ({
+        challenge: challenge,
+        opponent: challenge.sender_user_id === userId ? receiver : sender,
+      }));
+      setChallengesWithOpponent(formattedData);
     }
     setLoading(false);
   }
 
   useEffect(() => {
-    loadChallenges();
+    loadChallengesWithOpponent();
   }, [userId]);
 
-  if (loading)
-    return <p>Loading challenges...</p>; 
+  if (loading) return <p>Loading challenges...</p>;
 
   return (
     <div className="challenges-page">
       <div className="card">
         <h1>All Challenges</h1>
 
-        {challenges.length === 0 ? (
+        {challengesWithOpponent.length === 0 ? (
           <p className="challenges-empty">No challenges yet.</p>
         ) : (
           <ul className="list">
-            {challenges.map((c) => (
-              <ChallengeRow key={c.id} challenge={c} />
+            {challengesWithOpponent.map((cwo) => (
+              <ChallengeRow key={cwo.challenge.id} challenge={cwo.challenge} opponent={cwo.opponent} />
             ))}
           </ul>
         )}
