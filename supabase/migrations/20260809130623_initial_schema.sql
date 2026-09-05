@@ -50,8 +50,8 @@ create table public.challenges (
   status           text not null check (status in ('pending', 'accepted', 'denied', 'completed')),
   sent_at          timestamptz default now(),
 
-  sender_user_id   uuid not null references auth.users(id) on delete cascade,
-  receiver_user_id uuid not null references auth.users(id) on delete cascade,
+  sender_user_id   uuid not null references public.profile(id) on delete cascade,
+  receiver_user_id uuid not null references public.profile(id) on delete cascade,
   winner_user_id   uuid references auth.users(id),
 
   facility_id      integer not null references public.facilities(id) on delete cascade
@@ -124,7 +124,7 @@ grant select on public.profiles to authenticated;
 create policy "Users can view their own profile"
 on public.profiles for select
 to authenticated
-using (id = auth.uid());
+using (true);
 
 create policy "Users can create their own profile"
 on public.profiles for insert
