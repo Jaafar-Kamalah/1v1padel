@@ -8,7 +8,7 @@ import supabase from "../../lib/supabase";
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
-type ChallengeWithOpponent = {
+type ChallengeSummary = {
   challenge: Challenge;
   opponent: Profile;
 };
@@ -17,17 +17,17 @@ function Challenges() {
   const { session } = useAuthContext();
   const userId = session?.user?.id;
 
-  const [challengesWithOpponent, setChallengesWithOpponent] = useState<ChallengeWithOpponent[]>([]);
+  const [challengeSummaries, setChallengeSummaries] = useState<ChallengeSummary[]>([]);
   const [loading, setLoading] = useState(true);
 
-  async function loadChallengesWithOpponent() {
+  async function loadChallengeSummaries() {
     if (!userId) {
-      setChallengesWithOpponent([]);
+      setChallengeSummaries([]);
       setLoading(false);
       return;
     }
 
-    // Get all user challenges and all involved user profiles
+    // Get all user challenges, involved user profiles and last message
     const { data, error } = await supabase
       .from("challenges")
       .select(
@@ -44,13 +44,13 @@ function Challenges() {
         challenge: challenge,
         opponent: challenge.sender_user_id === userId ? receiver : sender,
       }));
-      setChallengesWithOpponent(formattedData);
+      setChallengeSummaries(formattedData);
     }
     setLoading(false);
   }
 
   useEffect(() => {
-    loadChallengesWithOpponent();
+    loadChallengeSummaries();
   }, [userId]);
 
   if (loading) return <p>Loading challenges...</p>;
@@ -60,12 +60,12 @@ function Challenges() {
       <div className="card">
         <h1>All Challenges</h1>
 
-        {challengesWithOpponent.length === 0 ? (
+        {challengeSummaries.length === 0 ? (
           <p className="challenges-empty">No challenges yet.</p>
         ) : (
           <ul className="list">
-            {challengesWithOpponent.map((cwo) => (
-              <ChallengeRow key={cwo.challenge.id} challenge={cwo.challenge} opponent={cwo.opponent} />
+            {challengeSummaries.map((cs) => (
+              <ChallengeRow key={cs.challenge.id} challenge={cs.challenge} opponent={cs.opponent} />
             ))}
           </ul>
         )}
