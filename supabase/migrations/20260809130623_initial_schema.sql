@@ -50,8 +50,8 @@ create table public.challenges (
   status           text not null check (status in ('pending', 'accepted', 'denied', 'completed')),
   sent_at          timestamptz default now(),
 
-  sender_user_id   uuid not null references public.profile(id) on delete cascade,
-  receiver_user_id uuid not null references public.profile(id) on delete cascade,
+  sender_user_id   uuid not null references public.profiles(id) on delete cascade,
+  receiver_user_id uuid not null references public.profiles(id) on delete cascade,
   winner_user_id   uuid references auth.users(id),
 
   facility_id      integer not null references public.facilities(id) on delete cascade
