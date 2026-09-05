@@ -46,7 +46,7 @@ function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
         </div>
         <div className="line-2">
           <span className="last-message">{lastMessage.content}</span>
-          <span className="status">{challenge.status}</span>
+          <span className="status">{challenge.status.charAt(0).toUpperCase() + challenge.status.slice(1)}</span>
         </div>
       </Link>
     </li>

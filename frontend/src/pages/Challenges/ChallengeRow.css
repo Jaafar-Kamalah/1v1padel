@@ -16,8 +16,9 @@
 
 /* ---------- Line 1 ---------- */
 .challenge-row .line-1 {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .challenge-row .name {
@@ -25,18 +26,21 @@
 }
 
 .challenge-row .date {
-    color: green
+  color: var(--gray-text-color);
+  font-size: 16px;
 }
 
 /* ---------- Line 2 ---------- */
 .challenge-row .line-2 {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .challenge-row .last-message {
-    color: blue;
+  color: var(--gray-text-color);
+  font-size: 16px;
 }
 .challenge-row .status {
-    color: red;
+  color: var(--gray-text-color);
 }
