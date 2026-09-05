@@ -24,7 +24,7 @@ create table public.profiles (
   first_name    text not null,
   last_name     text not null,
   rating integer not null default 1000,
-  created_at    timestamptz default now() -- For analytics
+  created_at    timestamptz not null default now() -- For analytics
 );
 
 -- ============================================================
@@ -34,7 +34,7 @@ create table public.memberships (
   id           serial primary key,
   user_id      uuid not null references auth.users(id) on delete cascade,
   facility_id  integer not null references public.facilities(id) on delete cascade,
-  joined_at    timestamptz default now(), -- For analytics
+  joined_at    timestamptz not null default now(), -- For analytics
 
   unique (user_id, facility_id)
 );
@@ -48,7 +48,7 @@ alter table public.memberships replica identity full;
 create table public.challenges (
   id               serial primary key,
   status           text not null check (status in ('pending', 'accepted', 'denied', 'completed')),
-  sent_at          timestamptz default now(),
+  sent_at          timestamptz not null default now(),
 
   sender_user_id   uuid not null references public.profiles(id) on delete cascade,
   receiver_user_id uuid not null references public.profiles(id) on delete cascade,
@@ -62,7 +62,7 @@ create table public.challenges (
 -- ============================================================
 create table public.messages (
   id             serial primary key,
-  sent_at        timestamptz default now(),
+  sent_at        timestamptz not null default now(),
   content        text not null,
 
   challenge_id   integer not null references public.challenges(id) on delete cascade,
