@@ -6,11 +6,29 @@ type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 type Message = Database["public"]["Tables"]["messages"]["Row"];
 
-
 interface Props {
   challenge: Challenge;
   opponent: Profile;
   lastMessage: Message;
+}
+
+function formatTimeAgo(pastDate: string): string {
+  const past = new Date(pastDate);
+  const now = new Date();
+
+  const diffMs = now.getTime() - past.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  const diffHours = Math.floor(diffMins / 60);
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffMins < 1) return "Just now";
+  if (diffMins < 60) return diffMins.toString() + "m ago";
+  if (diffHours < 24) return diffHours.toString() + "h ago";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return diffDays.toString() + "d ago";
+
+  return past.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+
 }
 
 function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
@@ -24,7 +42,7 @@ function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
           <span className="name">
             {opponent.first_name + " " + opponent.last_name}
           </span>
-          <span className="date">{challenge.sent_at}</span>
+          <span className="date">{formatTimeAgo(lastMessage.sent_at)}</span>
         </div>
         <div className="line-2">
           <span className="last-message">{lastMessage.content}</span>
