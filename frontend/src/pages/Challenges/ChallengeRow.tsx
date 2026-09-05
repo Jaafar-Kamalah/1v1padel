@@ -4,13 +4,16 @@ import "./ChallengeRow.css";
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+type Message = Database["public"]["Tables"]["messages"]["Row"];
+
 
 interface Props {
   challenge: Challenge;
   opponent: Profile;
+  lastMessage: Message;
 }
 
-function ChallengeRow({ challenge, opponent }: Props) {
+function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
   return (
     <li className="challenge-row">
       <Link className="link" to="/">
@@ -24,7 +27,7 @@ function ChallengeRow({ challenge, opponent }: Props) {
           <span className="date">{challenge.sent_at}</span>
         </div>
         <div className="line-2">
-          <span className="last-message">Last message placeholder</span>
+          <span className="last-message">{lastMessage.content}</span>
           <span className="status">{challenge.status}</span>
         </div>
       </Link>

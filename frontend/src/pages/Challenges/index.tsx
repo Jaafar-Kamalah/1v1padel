@@ -7,10 +7,12 @@ import supabase from "../../lib/supabase";
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+type Message = Database["public"]["Tables"]["messages"]["Row"];
 
 type ChallengeSummary = {
   challenge: Challenge;
   opponent: Profile;
+  lastMessage: Message; // Assumes that a challenge always has atleast one message
 };
 
 function Challenges() {
@@ -33,16 +35,20 @@ function Challenges() {
       .select(
         `*,
       sender:profiles!sender_user_id(*),
-      receiver:profiles!receiver_user_id(*)`,
+      receiver:profiles!receiver_user_id(*),
+      messages(*)`
       )
-      .or(`sender_user_id.eq.${userId}, receiver_user_id.eq.${userId}`);
+      .or(`sender_user_id.eq.${userId}, receiver_user_id.eq.${userId}`)
+      .order("sent_at", {referencedTable: "messages", ascending: false})
+      .limit(1, {referencedTable: "messages"});
 
     if (error) {
       console.error("Error fetching challenges: ", error);
     } else {
-      const formattedData = data.map(({ sender, receiver, ...challenge }) => ({
+      const formattedData = data.map(({ sender, receiver, messages, ...challenge }) => ({
         challenge: challenge,
         opponent: challenge.sender_user_id === userId ? receiver : sender,
+        lastMessage: messages[0]
       }));
       setChallengeSummaries(formattedData);
     }
@@ -65,7 +71,7 @@ function Challenges() {
         ) : (
           <ul className="list">
             {challengeSummaries.map((cs) => (
-              <ChallengeRow key={cs.challenge.id} challenge={cs.challenge} opponent={cs.opponent} />
+              <ChallengeRow key={cs.challenge.id} challenge={cs.challenge} opponent={cs.opponent} lastMessage={cs.lastMessage} />
             ))}
           </ul>
         )}
