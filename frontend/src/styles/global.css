@@ -139,31 +139,31 @@ textarea {
 
 /* ---------- Input section ---------- */
 
-::placeholder {
+.gb-input-group ::placeholder {
   color: rgba(255, 255, 255, 0.4);
 }
 
-.input-group {
+.gb-input-group {
   margin-bottom: 20px;
 }
 
-.input-group input {
+.gb-input-group input {
   background-color: rgba(255, 255, 255, 0.08);
   width: 100%;
   padding: 5px;
 }
 
-.input-group select {
+.gb-input-group select {
   background-color: rgba(255, 255, 255, 0.08);
   width: 100%;
   padding: 5px;
 }
 
-.input-group select option {
+.gb-input-group select option {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.input-group textarea {
+.gb-input-group textarea {
   background-color: rgba(255, 255, 255, 0.08);
   border-bottom-color: rgba(0, 0, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -175,33 +175,33 @@ textarea {
 
 /* ---------- Button section ---------- */
 
-.green-btn,
-.gray-btn {
+.gb-green-btn,
+.gb-gray-btn {
   border-radius: var(--radius);
   text-shadow: var(--text-shadow);
   font-weight: 600;
 }
 
-.green-btn {
+.gb-green-btn {
   background-image: var(--green-gradient);
   box-shadow: var(--green-btn-shadow);
 }
 
-.green-btn:disabled {
+.gb-green-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.green-btn:hover:not(:disabled) {
+.gb-green-btn:hover:not(:disabled) {
   background-image: var(--green-gradient-highlight);
 }
 
-.gray-btn {
+.gb-gray-btn {
   background-image: var(--gray-gradient);
   box-shadow: var(--gray-btn-shadow);
 }
 
-.gray-btn:hover {
+.gb-gray-btn:hover {
   background-image: var(--gray-gradient-highlight);
 }
 

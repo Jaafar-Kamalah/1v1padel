@@ -74,7 +74,7 @@ function Register() {
       <div className="card">
         <form onSubmit={handleSubmit}>
           <h1>Register an Account</h1>
-          <div className="input-group">
+          <div className="gb-input-group">
             <input
               type="text"
               placeholder="First name"
@@ -83,7 +83,7 @@ function Register() {
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div className="gb-input-group">
             <input
               type="text"
               placeholder="Last name"
@@ -92,7 +92,7 @@ function Register() {
               onChange={(e) => setLastName(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div className="gb-input-group">
             <input
               type="email"
               placeholder="Email"
@@ -101,7 +101,7 @@ function Register() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div className="gb-input-group">
             <input
               type="password"
               placeholder="Password"
@@ -110,7 +110,7 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div className="gb-input-group">
             <select
               required
               value={startingRating ?? ""}

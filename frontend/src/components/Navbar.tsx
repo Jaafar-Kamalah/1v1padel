@@ -51,12 +51,12 @@ function Navbar() {
         ) : (
           <ul className="logged-out-ul">
             <li>
-              <Link className="green-btn" to="/register" aria-label="Register">
+              <Link className="gb-green-btn" to="/register" aria-label="Register">
                 Register
               </Link>
             </li>
             <li>
-              <Link className="gray-btn" to="/login" aria-label="Login">
+              <Link className="gb-gray-btn" to="/login" aria-label="Login">
                 Log in
               </Link>
             </li>

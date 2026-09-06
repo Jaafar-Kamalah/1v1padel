@@ -64,7 +64,7 @@ function ChallengePopup({ onClose, challenged }: Props) {
           <X strokeWidth={3} />
         </button>
         <h2>Challenge Message</h2>
-        <div className="input-group">
+        <div className="gb-input-group">
           <textarea
             className="modal-textarea"
             placeholder="Say hi, and let them know when you're free to play..."
@@ -75,7 +75,7 @@ function ChallengePopup({ onClose, challenged }: Props) {
         </div>
 
         <button
-          className="modal-send-btn green-btn"
+          className="modal-send-btn gb-green-btn"
           onClick={() => onSend(message)}
           disabled={loading || message.trim() === ""}
         >

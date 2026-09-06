@@ -44,8 +44,8 @@
 }
 
 /* ---------- Logged out section ---------- */
-.nav .green-btn,
-.nav .gray-btn {
+.nav .gb-green-btn,
+.nav .gb-gray-btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;

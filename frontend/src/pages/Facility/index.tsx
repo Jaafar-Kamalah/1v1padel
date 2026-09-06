@@ -150,7 +150,7 @@ function Facility() {
     if (joinedEntry) {
       return (
         <button
-          className="leave-btn gray-btn"
+          className="leave-btn gb-gray-btn"
           disabled={membershipActionLoading}
           onClick={leaveFacility}
         >
@@ -160,7 +160,7 @@ function Facility() {
     }
     return (
       <button
-        className="join-btn green-btn"
+        className="join-btn gb-green-btn"
         disabled={membershipActionLoading}
         onClick={joinFacility}
       >
@@ -213,7 +213,7 @@ function Facility() {
               ) : (
                 <div className="challenge">
                   <button
-                    className="challenge-btn green-btn"
+                    className="challenge-btn gb-green-btn"
                     disabled={!joinedEntry}
                     onClick={() => setChallenge(l)}
                   >

@@ -40,7 +40,7 @@ function Register() {
     <div className="login-page">
       <div className="card">
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
+          <div className="gb-input-group">
             <input
               type="email"
               placeholder="Email"
@@ -49,7 +49,7 @@ function Register() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="input-group">
+          <div className="gb-input-group">
             <input
               type="password"
               placeholder="Password"
