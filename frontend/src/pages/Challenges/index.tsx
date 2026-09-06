@@ -19,7 +19,9 @@ function Challenges() {
   const { session } = useAuthContext();
   const userId = session?.user?.id;
 
-  const [challengeSummaries, setChallengeSummaries] = useState<ChallengeSummary[]>([]);
+  const [challengeSummaries, setChallengeSummaries] = useState<
+    ChallengeSummary[]
+  >([]);
   const [loading, setLoading] = useState(true);
 
   async function loadChallengeSummaries() {
@@ -36,20 +38,28 @@ function Challenges() {
         `*,
       sender:profiles!sender_user_id(*),
       receiver:profiles!receiver_user_id(*),
-      messages(*)`
+      messages(*)`,
       )
       .or(`sender_user_id.eq.${userId}, receiver_user_id.eq.${userId}`)
-      .order("sent_at", {referencedTable: "messages", ascending: false})
-      .limit(1, {referencedTable: "messages"});
+      .order("sent_at", { referencedTable: "messages", ascending: false })
+      .limit(1, { referencedTable: "messages" });
 
     if (error) {
       console.error("Error fetching challenges: ", error);
     } else {
-      const formattedData = data.map(({ sender, receiver, messages, ...challenge }) => ({
-        challenge: challenge,
-        opponent: challenge.sender_user_id === userId ? receiver : sender,
-        lastMessage: messages[0]
-      }));
+      const formattedData = data
+        .map(({ sender, receiver, messages, ...challenge }) => ({
+          challenge: challenge,
+          opponent: challenge.sender_user_id === userId ? receiver : sender,
+          lastMessage: messages[0],
+        }))
+        .sort((cs1, cs2) => {
+          // Sort by newest first
+          return (
+            new Date(cs2.lastMessage.sent_at).getTime() -
+            new Date(cs1.lastMessage.sent_at).getTime()
+          );
+        });
       setChallengeSummaries(formattedData);
     }
     setLoading(false);
@@ -71,7 +81,12 @@ function Challenges() {
         ) : (
           <ul className="list">
             {challengeSummaries.map((cs) => (
-              <ChallengeRow key={cs.challenge.id} challenge={cs.challenge} opponent={cs.opponent} lastMessage={cs.lastMessage} />
+              <ChallengeRow
+                key={cs.challenge.id}
+                challenge={cs.challenge}
+                opponent={cs.opponent}
+                lastMessage={cs.lastMessage}
+              />
             ))}
           </ul>
         )}
