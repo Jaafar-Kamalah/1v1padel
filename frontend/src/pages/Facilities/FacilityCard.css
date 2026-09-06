@@ -47,9 +47,6 @@
 }
 
 .fac-card .fac-name h4 {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   margin: 0;
 }
 

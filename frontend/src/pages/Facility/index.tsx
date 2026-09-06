@@ -202,7 +202,7 @@ function Facility() {
             >
               <div className="rank">{i + 1}</div>
 
-              <div className="name">
+              <div className="name gb-ellipsis">
                 {l.first_name} {l.last_name}
               </div>
 

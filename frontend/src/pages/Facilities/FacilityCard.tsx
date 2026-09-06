@@ -15,7 +15,7 @@ function FacilityCard({ imageUrl, name, id }: Props) {
         <div className="fac-overlay"></div>
       </div>
       <div className="fac-name">
-        <h4>{name}</h4>
+        <h4 className="gb-ellipsis">{name}</h4>
       </div>
     </Link>
   );
