@@ -6,6 +6,14 @@ type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 type Message = Database["public"]["Tables"]["messages"]["Row"];
 
+// TODO: maybe use enum in db and get status types from types.ts to make this typesafe
+const STATUS_COLOR: Record<string, string> = {
+  "pending": "orange",
+  "accepted": "green",
+  "denied": "gray",
+  "completed": "gray",
+};
+
 interface Props {
   challenge: Challenge;
   opponent: Profile;
@@ -28,7 +36,6 @@ function formatTimeAgo(pastDate: string): string {
   if (diffDays < 7) return diffDays.toString() + "d ago";
 
   return past.toLocaleDateString(undefined, { month: "short", day: "numeric" });
-
 }
 
 function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
@@ -45,8 +52,13 @@ function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
           <span className="date">{formatTimeAgo(lastMessage.sent_at)}</span>
         </div>
         <div className="line-2">
-          <span className="last-message gb-ellipsis">{lastMessage.content}</span>
-          <span className="status">{challenge.status.charAt(0).toUpperCase() + challenge.status.slice(1)}</span>
+          <span className="last-message gb-ellipsis">
+            {lastMessage.content}
+          </span>
+          <span className={"status gb-" + STATUS_COLOR[challenge.status] + "-pill"}>
+            {challenge.status.charAt(0).toUpperCase() +
+              challenge.status.slice(1)}
+          </span>
         </div>
       </Link>
     </li>

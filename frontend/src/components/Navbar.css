@@ -20,6 +20,10 @@
   align-items: center;
 }
 
+.nav .padel {
+  fill: var(--green);
+}
+
 /* ---------- Logged in section ---------- */
 .nav .icon {
   width: 28px;

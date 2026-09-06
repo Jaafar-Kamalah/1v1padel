@@ -25,7 +25,7 @@ function Navbar() {
         >
           <text x="0" y="22" fontSize="18" fontWeight="700" fill="#ffffff">
             1v1
-            <tspan fill="rgb(169, 236, 102)">Padel</tspan>
+            <tspan className="padel">Padel</tspan>
           </text>
         </svg>
       </Link>

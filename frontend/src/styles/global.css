@@ -52,17 +52,25 @@
   --text-shadow: rgba(0, 0, 0, 0.2) 0px 1px 0px;
 
   --text-color: rgba(255, 255, 255, 0.9);
+
   --gray-text-color: rgba(255, 255, 255, 0.5);
   --gray-line: rgba(100, 100, 100, 0.8);
+  --dark-gray: rgb(38, 36, 33);
+  --light-gray: rgba(255, 255, 255, 0.2);
 
   --gold: #e3b341;
   --silver: #b9c0cf;
   --bronze: #c98a4b;
-  --dark-gray: rgb(38, 36, 33);
-  --light-gray: rgba(255, 255, 255, 0.2);
-  --soft-white: rgba(255, 255, 255, 0.72);
-  --green-tint: rgba(129, 182, 76, 0.15);
 
+  --green-tint: rgba(129, 182, 76, 0.15);
+  --green: rgb(169, 236, 102);
+
+  --orange-tint: rgba(245, 166, 35, 0.15);
+  --orange: rgb(245, 166, 35);
+
+  --gray-tint: rgba(183, 202, 190, 0.15);
+  --gray: rgb(183, 202, 190);
+  
   --radius: 10px;
 }
 
@@ -209,4 +217,30 @@ textarea {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* ---------- Pill section ---------- */
+
+.gb-green-pill,
+.gb-gray-pill,
+.gb-orange-pill {
+  font-size: 14px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.gb-green-pill {
+  background-color: var(--green-tint);
+  color: var(--green);
+}
+
+.gb-gray-pill {
+  background-color: var(--gray-tint);
+  color: var(--gray);
+}
+
+.gb-orange-pill {
+  background-color: var(--orange-tint);
+  color: var(--orange);
 }

@@ -19,7 +19,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 14px;
+  gap: 20px;
 }
 
 .challenge-row .name {
@@ -29,6 +29,7 @@
 .challenge-row .date {
   color: var(--gray-text-color);
   font-size: 16px;
+  flex-shrink: 0;
 }
 
 /* ---------- Line 2 ---------- */
@@ -36,7 +37,8 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 14px;
+  gap: 20px;
+  margin-top: 4px;
 }
 
 .challenge-row .last-message {
@@ -44,5 +46,6 @@
   font-size: 16px;
 }
 .challenge-row .status {
-  color: var(--gray-text-color);
+  flex-shrink: 0;
+  font-weight: 600;
 }
