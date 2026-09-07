@@ -69,6 +69,43 @@ function Challenges() {
     loadChallengeSummaries();
   }, [userId]);
 
+  // Live update on challenge insert, delete and update
+  useEffect(() => {
+    if (!userId) return;
+
+    const channel = supabase
+      .channel("challenges")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "challenges",
+          filter: `sender_user_id=eq.${userId}`,
+        },
+        () => {
+          loadChallengeSummaries();
+        },
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "challenges",
+          filter: `receiver_user_id=eq.${userId}`,
+        },
+        () => {
+          loadChallengeSummaries();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId]);
+
   if (loading) return <p>Loading challenges...</p>;
 
   return (

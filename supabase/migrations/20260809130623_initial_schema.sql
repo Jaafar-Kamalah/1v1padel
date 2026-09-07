@@ -39,7 +39,7 @@ create table public.memberships (
   unique (user_id, facility_id)
 );
 
--- Set replica identity for realtime updates
+-- Set replica identity so Realtime can filter delete events
 alter table public.memberships replica identity full;
 
 -- ============================================================
@@ -56,6 +56,9 @@ create table public.challenges (
 
   facility_id      integer not null references public.facilities(id) on delete cascade
 );
+
+-- Set replica identity for realtime updates
+alter table public.challenges replica identity full;
 
 -- ============================================================
 -- TABLE: messages (chat messages inside challenge)
