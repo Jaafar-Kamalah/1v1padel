@@ -9,13 +9,12 @@ import Facility from "./pages/Facility";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
 import Navbar from "./components/Navbar";
-
-
+import Challenge from "./pages/Challenge";
 
 function App() {
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <Routes>
         <Route
           path="/login"
@@ -49,6 +48,15 @@ function App() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/challenges/:challengeId"
+          element={
+            <PrivateRoute>
+              <Challenge/>
+            </PrivateRoute>
+          }
+        />
+        ,
         <Route
           path="/profile"
           element={

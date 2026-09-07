@@ -41,7 +41,7 @@ function formatTimeAgo(pastDate: string): string {
 function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
   return (
     <li className="challenge-row">
-      <Link className="link" to="/">
+      <Link className="link" to={"/challenges/" + challenge.id}>
         {/* TODO: Add avatar/image to tell apart users with same name */}
 
         <div className="line-1">
@@ -55,7 +55,9 @@ function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
           <span className="last-message gb-ellipsis">
             {lastMessage.content}
           </span>
-          <span className={"status gb-" + STATUS_COLOR[challenge.status] + "-pill"}>
+          <span
+            className={"status gb-" + STATUS_COLOR[challenge.status] + "-pill"}
+          >
             {challenge.status.charAt(0).toUpperCase() +
               challenge.status.slice(1)}
           </span>
