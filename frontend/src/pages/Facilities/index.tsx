@@ -60,7 +60,7 @@ function Facilities() {
     if (!userId) return;
 
     const channel = supabase
-      .channel("myFacilitiesMembership")
+      .channel("facilities-memberships")
       .on(
         "postgres_changes",
         {

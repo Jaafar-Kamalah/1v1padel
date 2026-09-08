@@ -82,7 +82,7 @@ function Facility() {
     if (!facilityId || !userId) return;
 
     const channel = supabase
-      .channel("leaderboard")
+      .channel("facility-memberships")
       .on(
         "postgres_changes",
         {

@@ -74,7 +74,7 @@ function Challenges() {
     if (!userId) return;
 
     const channel = supabase
-      .channel("challenges")
+      .channel("challenges-challenges")
       .on(
         "postgres_changes",
         {
