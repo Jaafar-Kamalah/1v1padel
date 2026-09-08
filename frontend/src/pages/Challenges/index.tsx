@@ -106,6 +106,35 @@ function Challenges() {
     };
   }, [userId]);
 
+  // Live update on message insert
+  const challengeIds = challengeSummaries.map((cs) => cs.challenge.id).sort();
+  const challengeIdsString = challengeIds.join(",");
+
+  useEffect(() => {
+    if (!userId || challengeIdsString === "") return;
+
+    const channel = supabase
+      .channel("challenges-messages")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "messages",
+          filter: `challenge_id=in.(${challengeIdsString})`,
+        },
+        () => {
+          // TODO: Instead of loadChallengeSummaries() only fetch and update the affected challenge
+          loadChallengeSummaries();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId, challengeIdsString]);
+
   if (loading) return <p>Loading challenges...</p>;
 
   return (
