@@ -52,7 +52,6 @@ function ChallengeRow({
         {/* TODO: Add avatar/image to tell apart users with same name */}
 
         <div className="line-1">
-          {" "}
           <div className="opponent">
             <span className="name gb-ellipsis">
               {opponent.first_name + " " + opponent.last_name}
@@ -70,7 +69,11 @@ function ChallengeRow({
             {lastMessage.content}
           </span>
           <span
-            className={"status gb-" + STATUS_COLOR[challenge.status] + "-pill"}
+            className={
+              "status gb-" +
+              (STATUS_COLOR[challenge.status] ?? "gray") +
+              "-pill"
+            }
           >
             {challenge.status.charAt(0).toUpperCase() +
               challenge.status.slice(1)}
