@@ -45,7 +45,22 @@
   color: var(--gray-text-color);
   font-size: 16px;
 }
+
 .challenge-row .status {
-  flex-shrink: 0;
   font-weight: 600;
+  font-size: 14px;
+  padding: 3px 10px;
+}
+
+.challenge-row .opponent {
+  display: flex;
+  align-items: center;
+}
+
+.challenge-row .rating {
+  font-weight: 700;
+  padding: 1px 6px;
+  margin-left: 8px;
+  font-size: 12px;
+  font-family: monospace;
 }

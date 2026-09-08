@@ -70,7 +70,7 @@
 
   --gray-tint: rgba(183, 202, 190, 0.15);
   --gray: rgb(183, 202, 190);
-  
+
   --radius: 10px;
 }
 
@@ -223,11 +223,11 @@ textarea {
 
 .gb-green-pill,
 .gb-gray-pill,
-.gb-orange-pill {
-  font-size: 14px;
-  padding: 3px 10px;
+.gb-orange-pill,
+.gb-rating-pill {
   border-radius: 999px;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .gb-green-pill {
@@ -243,4 +243,9 @@ textarea {
 .gb-orange-pill {
   background-color: var(--orange-tint);
   color: var(--orange);
+}
+
+.gb-rating-pill {
+  color: var(--background);
+  background-color: var(--green);
 }

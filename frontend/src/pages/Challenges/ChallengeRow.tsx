@@ -46,9 +46,12 @@ function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
 
         <div className="line-1">
           {" "}
-          <span className="name gb-ellipsis">
-            {opponent.first_name + " " + opponent.last_name}
-          </span>
+          <div className="opponent">
+            <span className="name gb-ellipsis">
+              {opponent.first_name + " " + opponent.last_name}
+            </span>
+            <span className="rating gb-rating-pill">{opponent.rating}</span>
+          </div>
           <span className="date">{formatTimeAgo(lastMessage.sent_at)}</span>
         </div>
         <div className="line-2">
