@@ -13,7 +13,7 @@ type ChallengeSummary = {
   challenge: Challenge;
   opponent: Profile;
   lastMessage: Message; // Assumes that a challenge always has atleast one message
-  facilityName: string
+  facilityName: string;
 };
 
 function Challenges() {
@@ -54,7 +54,7 @@ function Challenges() {
           challenge: challenge,
           opponent: challenge.sender_user_id === userId ? receiver : sender,
           lastMessage: messages[0],
-          facilityName: facility.name
+          facilityName: facility.name,
         }))
         .sort((cs1, cs2) => {
           // Sort challenges so that the challenge with the latest message is first
@@ -155,7 +155,7 @@ function Challenges() {
                 challenge={cs.challenge}
                 opponent={cs.opponent}
                 lastMessage={cs.lastMessage}
-                facilitName={cs.facilityName}
+                facilityName={cs.facilityName}
               />
             ))}
           </ul>

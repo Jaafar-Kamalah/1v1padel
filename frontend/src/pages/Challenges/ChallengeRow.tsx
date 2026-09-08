@@ -19,7 +19,7 @@ interface Props {
   challenge: Challenge;
   opponent: Profile;
   lastMessage: Message;
-  facilitName: string;
+  facilityName: string;
 }
 
 function formatTimeAgo(pastDate: string): string {
@@ -44,7 +44,7 @@ function ChallengeRow({
   challenge,
   opponent,
   lastMessage,
-  facilitName,
+  facilityName: facilitName,
 }: Props) {
   return (
     <li className="challenge-row">
