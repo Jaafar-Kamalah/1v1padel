@@ -13,6 +13,7 @@ type ChallengeSummary = {
   challenge: Challenge;
   opponent: Profile;
   lastMessage: Message; // Assumes that a challenge always has atleast one message
+  facilityName: string
 };
 
 function Challenges() {
@@ -38,7 +39,8 @@ function Challenges() {
         `*,
       sender:profiles!sender_user_id(*),
       receiver:profiles!receiver_user_id(*),
-      messages(*)`,
+      messages(*),
+      facility:facilities(name)`,
       )
       .or(`sender_user_id.eq.${userId}, receiver_user_id.eq.${userId}`)
       .order("sent_at", { referencedTable: "messages", ascending: false })
@@ -48,13 +50,14 @@ function Challenges() {
       console.error("Error fetching challenges: ", error);
     } else {
       const formattedData = data
-        .map(({ sender, receiver, messages, ...challenge }) => ({
+        .map(({ sender, receiver, messages, facility, ...challenge }) => ({
           challenge: challenge,
           opponent: challenge.sender_user_id === userId ? receiver : sender,
           lastMessage: messages[0],
+          facilityName: facility.name
         }))
         .sort((cs1, cs2) => {
-          // Sort by newest first
+          // Sort challenges so that the challenge with the latest message is first
           return (
             new Date(cs2.lastMessage.sent_at).getTime() -
             new Date(cs1.lastMessage.sent_at).getTime()
@@ -152,6 +155,7 @@ function Challenges() {
                 challenge={cs.challenge}
                 opponent={cs.opponent}
                 lastMessage={cs.lastMessage}
+                facilitName={cs.facilityName}
               />
             ))}
           </ul>

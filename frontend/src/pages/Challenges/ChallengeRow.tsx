@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { Database } from "../../../../supabase/types";
 import "./ChallengeRow.css";
+import { MapPin } from "lucide-react";
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
@@ -8,16 +9,17 @@ type Message = Database["public"]["Tables"]["messages"]["Row"];
 
 // TODO: maybe use enum in db and get status types from types.ts to make this typesafe
 const STATUS_COLOR: Record<string, string> = {
-  "pending": "orange",
-  "accepted": "green",
-  "denied": "gray",
-  "completed": "gray",
+  pending: "orange",
+  accepted: "green",
+  denied: "gray",
+  completed: "gray",
 };
 
 interface Props {
   challenge: Challenge;
   opponent: Profile;
   lastMessage: Message;
+  facilitName: string;
 }
 
 function formatTimeAgo(pastDate: string): string {
@@ -38,7 +40,12 @@ function formatTimeAgo(pastDate: string): string {
   return past.toLocaleDateString(undefined, { month: "short", day: "numeric" });
 }
 
-function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
+function ChallengeRow({
+  challenge,
+  opponent,
+  lastMessage,
+  facilitName,
+}: Props) {
   return (
     <li className="challenge-row">
       <Link className="link" to={"/challenges/" + challenge.id}>
@@ -53,6 +60,10 @@ function ChallengeRow({ challenge, opponent, lastMessage }: Props) {
             <span className="rating gb-rating-pill">{opponent.rating}</span>
           </div>
           <span className="date">{formatTimeAgo(lastMessage.sent_at)}</span>
+        </div>
+        <div className="location gb-ellipsis">
+          <MapPin className="map-pin" />
+          <span>{facilitName}</span>
         </div>
         <div className="line-2">
           <span className="last-message gb-ellipsis">
