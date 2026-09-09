@@ -1,0 +1,13 @@
+.challenge-page {
+  display: flex;
+  justify-content: center;
+}
+
+.challenge-page .card {
+  width: 100%;
+  max-width: 960px;
+  background-color: var(--darker-bg);
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray)
+}
