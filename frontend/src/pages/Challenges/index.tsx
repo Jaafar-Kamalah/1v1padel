@@ -48,6 +48,8 @@ function Challenges() {
 
     if (error) {
       console.error("Error fetching challenges: ", error);
+      setLoading(false);
+      return;
     } else {
       const formattedData = data
         .map(({ sender, receiver, messages, facility, ...challenge }) => ({
