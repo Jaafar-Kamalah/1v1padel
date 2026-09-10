@@ -16,6 +16,13 @@ type ChallengeDetails = {
   facilityName: string;
 };
 
+const STATUS_COLOR: Record<string, string> = {
+  pending: "orange",
+  accepted: "green",
+  denied: "gray",
+  completed: "gray",
+};
+
 function Challenge() {
   const { challengeId } = useParams();
   const { session } = useAuthContext();
@@ -77,8 +84,30 @@ function Challenge() {
   return (
     <div className="challenge-page">
       <div className="card">
-        <p>{challengeDetails.opponent.first_name}</p>
-        <p>{challengeDetails.challenge.status}</p>
+        <div className="header">
+          <div className="opponent">
+            <span className="name">
+              {challengeDetails.opponent.first_name}{" "}
+              {challengeDetails.opponent.last_name}
+            </span>
+            <div className="rating">
+              <span className="rating-label">Rating </span>
+              <span className="rating-value gb-rating-pill">
+                {challengeDetails.opponent.rating}
+              </span>
+            </div>
+          </div>
+          <div
+            className={
+              "status gb-" +
+              (STATUS_COLOR[challengeDetails.challenge.status] ?? "gray") +
+              "-pill"
+            }
+          >
+            {challengeDetails.challenge.status.charAt(0).toUpperCase() +
+              challengeDetails.challenge.status.slice(1)}
+          </div>
+        </div>
         <p>{challengeDetails.messages[0].content}</p>
       </div>
     </div>

@@ -10,7 +10,7 @@
 
 /* ---------- Header section ---------- */
 
-.header {
+.facility-page .header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
