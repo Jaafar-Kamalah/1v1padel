@@ -1,4 +1,4 @@
-import type { Database } from "../../../../supabase/types";
+import "./ChatBubble.css";
 
 interface Props {
   content: string;
@@ -31,9 +31,11 @@ function formatTime(pastDate: string): string {
 
 function ChatBubble({ content, sentAt, mine }: Props) {
   return (
-    <div className={"chat-bubble " + (mine ? "mine" : "theirs")}>
-      <div className="content">{content}</div>
-      <div className="time">{formatTime(sentAt)}</div>
+    <div className="chat-bubble">
+      <div className={(mine ? "mine" : "theirs")}>
+        <div className="content">{content}</div>
+        <div className="sent-at">{formatTime(sentAt)}</div>
+      </div>
     </div>
   );
 }

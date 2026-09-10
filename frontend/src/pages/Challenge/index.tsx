@@ -45,7 +45,7 @@ function Challenge() {
       facility:facilities!facility_id(*)`,
       )
       .eq("id", challengeId)
-      .order("sent_at", { referencedTable: "messages", ascending: false })
+      .order("sent_at", { referencedTable: "messages", ascending: true })
       .maybeSingle();
 
     if (error) {
