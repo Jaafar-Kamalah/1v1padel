@@ -11,10 +11,10 @@
   border-radius: 8px;
   border: 1px solid var(--light-gray);
   padding: 0;
+  text-align: left;
 }
 
-/* ---------- Header section ---------- */
-
+/* ---------- Opponent info ---------- */
 .challenge-page .header {
   border-bottom: 1px solid var(--light-gray);
   position: relative;
@@ -49,6 +49,7 @@
   padding: 2px 6px;
 }
 
+/* ---------- Challenge info ---------- */
 .challenge-page .status {
   position: absolute;
   top: 20px;
@@ -57,4 +58,27 @@
   font-weight: 600;
   font-size: 20px;
   padding: 6px 16px;
+}
+
+.challenge-page .meta {
+    margin-top: 10px;
+    display: flex;
+    gap: 22px;
+
+}
+
+.challenge-page .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.challenge-page .meta-label {
+    font-size: 14px;
+    color: var(--gray-text-color);
+}
+
+.challenge-page .meta-value {
+    font-size: 16px;
+    font-weight: 500;
 }

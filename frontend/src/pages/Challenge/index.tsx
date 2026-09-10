@@ -101,6 +101,14 @@ function Challenge() {
             {challengeDetails.challenge.status.charAt(0).toUpperCase() +
               challengeDetails.challenge.status.slice(1)}
           </div>
+          <div className="meta">
+            <div className="meta-item">
+              <span className="meta-label">Facility</span>
+              <span className="meta-value">
+                {challengeDetails.facilityName}
+              </span>
+            </div>
+          </div>
         </div>
         <p>{challengeDetails.messages[0].content}</p>
       </div>
