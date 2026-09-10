@@ -9,12 +9,13 @@ import { STATUS_COLOR } from "../../lib/constants";
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 type Message = Database["public"]["Tables"]["messages"]["Row"];
+type Facility = Database["public"]["Tables"]["facilities"]["Row"];
 
 type ChallengeDetails = {
   challenge: Challenge;
   opponent: Profile;
   messages: Message[]; // Assumes that a challenge always has atleast one message
-  facilityName: string;
+  facility: Facility;
 };
 
 function Challenge() {
@@ -40,7 +41,7 @@ function Challenge() {
       sender:profiles!sender_user_id(*),
       receiver:profiles!receiver_user_id(*),
       messages(*),
-      facility:facilities(name)`,
+      facility:facilities!facility_id(*)`,
       )
       .eq("id", challengeId)
       .order("sent_at", { referencedTable: "messages", ascending: false })
@@ -63,7 +64,7 @@ function Challenge() {
       challenge: challenge,
       opponent: challenge.sender_user_id === userId ? receiver : sender,
       messages: messages,
-      facilityName: facility.name,
+      facility: facility,
     });
     setLoading(false);
   }
@@ -105,7 +106,13 @@ function Challenge() {
             <div className="meta-item">
               <span className="meta-label">Facility</span>
               <span className="meta-value">
-                {challengeDetails.facilityName}
+                {challengeDetails.facility.name}
+              </span>
+            </div>
+            <div className="meta-item">
+              <span className="meta-label">Address</span>
+              <span className="meta-value">
+                {challengeDetails.facility.address}
               </span>
             </div>
           </div>
