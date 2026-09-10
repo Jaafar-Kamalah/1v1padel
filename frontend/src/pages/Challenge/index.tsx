@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import type { Database } from "../../../../supabase/types";
 import supabase from "../../lib/supabase";
+import { STATUS_COLOR } from "../../lib/constants";
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
@@ -14,13 +15,6 @@ type ChallengeDetails = {
   opponent: Profile;
   messages: Message[]; // Assumes that a challenge always has atleast one message
   facilityName: string;
-};
-
-const STATUS_COLOR: Record<string, string> = {
-  pending: "orange",
-  accepted: "green",
-  denied: "gray",
-  completed: "gray",
 };
 
 function Challenge() {

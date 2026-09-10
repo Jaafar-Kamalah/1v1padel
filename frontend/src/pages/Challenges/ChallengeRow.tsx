@@ -2,18 +2,11 @@ import { Link } from "react-router-dom";
 import type { Database } from "../../../../supabase/types";
 import "./ChallengeRow.css";
 import { MapPin } from "lucide-react";
+import { STATUS_COLOR } from "../../lib/constants";
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 type Message = Database["public"]["Tables"]["messages"]["Row"];
-
-// TODO: maybe use enum in db and get status types from types.ts to make this typesafe
-const STATUS_COLOR: Record<string, string> = {
-  pending: "orange",
-  accepted: "green",
-  denied: "gray",
-  completed: "gray",
-};
 
 interface Props {
   challenge: Challenge;
