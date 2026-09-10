@@ -5,6 +5,7 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import type { Database } from "../../../../supabase/types";
 import supabase from "../../lib/supabase";
 import { STATUS_COLOR } from "../../lib/constants";
+import ChatBubble from "./ChatBubble";
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
@@ -80,6 +81,7 @@ function Challenge() {
     <div className="challenge-page">
       <div className="card">
         <div className="header">
+          {/* Opponent information */}
           <div className="opponent">
             <span className="name  gb-ellipsis">
               {challengeDetails.opponent.first_name}{" "}
@@ -92,6 +94,7 @@ function Challenge() {
               </span>
             </div>
           </div>
+          {/* Status display */}
           <div
             className={
               "status gb-" +
@@ -102,6 +105,7 @@ function Challenge() {
             {challengeDetails.challenge.status.charAt(0).toUpperCase() +
               challengeDetails.challenge.status.slice(1)}
           </div>
+          {/* Challenge information */}
           <div className="meta">
             <div className="meta-item">
               <span className="meta-label">Facility</span>
@@ -116,8 +120,20 @@ function Challenge() {
               </span>
             </div>
           </div>
+          {/* Buttons */}
         </div>
-        <p>{challengeDetails.messages[0].content}</p>
+        {/* Chat */}
+        <div className="chat">
+          {challengeDetails.messages.map((message) => (
+            <ChatBubble
+              key={message.id}
+              content={message.content}
+              sentAt={message.sent_at}
+              mine={message.sender_user_id === userId}
+            />
+          ))}
+        </div>
+        {/* Textarea  */}
       </div>
     </div>
   );
