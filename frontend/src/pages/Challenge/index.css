@@ -19,18 +19,22 @@
   border-bottom: 1px solid var(--light-gray);
   position: relative;
   padding: 20px;
+  min-width: 0;
 }
 
 .challenge-page .opponent {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  min-width: 0;
+  max-width: calc(100% - 110px);
 }
 
 .challenge-page .name {
   font-weight: 700;
   font-size: 26px;
   line-height: 1;
+  max-width: 100%;
 }
 
 .challenge-page .rating {

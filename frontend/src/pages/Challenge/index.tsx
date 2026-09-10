@@ -81,7 +81,7 @@ function Challenge() {
       <div className="card">
         <div className="header">
           <div className="opponent">
-            <span className="name">
+            <span className="name  gb-ellipsis">
               {challengeDetails.opponent.first_name}{" "}
               {challengeDetails.opponent.last_name}
             </span>
