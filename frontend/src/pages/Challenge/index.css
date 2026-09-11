@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   height: 720px;
-  max-height: calc(100vh - 95px); 
+  max-height: calc(100vh - 95px);
   overflow: hidden;
 }
 
@@ -71,32 +71,62 @@
 }
 
 .challenge-page .meta {
-    margin-top: 10px;
-    display: flex;
-    gap: 22px;
+  margin-top: 10px;
+  display: flex;
+  gap: 22px;
 }
 
 .challenge-page .meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 
 .challenge-page .meta-label {
-    font-size: 14px;
-    color: var(--gray-text-color);
+  font-size: 14px;
+  color: var(--gray-text-color);
 }
 
 .challenge-page .meta-value {
-    font-size: 16px;
-    font-weight: 500;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-/* ---------- Chat and textarea ---------- */
-.challenge-page .chat{
+/* ---------- Chat and input ---------- */
+.challenge-page .chat {
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 7px 0;
   overflow-y: auto;
+  scrollbar-color: var(--light-gray) transparent;
+  border-bottom: 1px solid var(--light-gray);
+    /* flex: 1;
+  min-height: 0; */
+}
+
+.challenge-page .chat-input{
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin: 0;
+  padding: 14px 16px;
+}
+
+.challenge-page .text-area {
+  width: 93%;
+  font-size: 15px;
+}
+
+.challenge-page .send-btn {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.challenge-page .send-btn svg {
+  width: 80%;
+  height: 80%;
 }

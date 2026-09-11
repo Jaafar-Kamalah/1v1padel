@@ -6,6 +6,7 @@ import type { Database } from "../../../../supabase/types";
 import supabase from "../../lib/supabase";
 import { STATUS_COLOR } from "../../lib/constants";
 import ChatBubble from "./ChatBubble";
+import { Send } from "lucide-react";
 
 type Challenge = Database["public"]["Tables"]["challenges"]["Row"];
 type Profile = Database["public"]["Tables"]["profiles"]["Row"];
@@ -133,7 +134,13 @@ function Challenge() {
             />
           ))}
         </div>
-        {/* Textarea  */}
+        {/* input  */}
+        <div className="chat-input gb-input-group">
+          <textarea className="text-area" rows={1} />
+          <button className="send-btn gb-green-btn">
+            <Send />
+          </button>
+        </div>
       </div>
     </div>
   );
