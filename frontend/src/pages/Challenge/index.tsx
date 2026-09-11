@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import "./index.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import type { Database } from "../../../../supabase/types";
 import supabase from "../../lib/supabase";
@@ -101,6 +101,14 @@ function Challenge() {
     };
   }, [userId, challengeId]);
 
+  const chatRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (chatRef.current) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  },[challengeDetails?.messages])
+
   if (loading) return <p>Loading messages...</p>;
   if (!challengeDetails) return <p>Failed to load challenge</p>;
 
@@ -150,7 +158,7 @@ function Challenge() {
           {/* Buttons */}
         </div>
         {/* Chat */}
-        <div className="chat">
+        <div className="chat" ref={chatRef}>
           {challengeDetails.messages.map((message) => (
             <ChatBubble
               key={message.id}
