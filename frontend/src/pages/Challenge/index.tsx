@@ -27,13 +27,14 @@ function Challenge() {
 
   const [challengeDetails, setChallengeDetails] =
     useState<ChallengeDetails | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingChallenge, setLoadingChallenge] = useState(true);
+  const [isSending, setIsSending] = useState(false);
   const [message, setMessage] = useState("");
 
   async function loadChallengeDetails() {
     if (!userId || !challengeId) {
       setChallengeDetails(null);
-      setLoading(false);
+      setLoadingChallenge(false);
       return;
     }
 
@@ -52,13 +53,13 @@ function Challenge() {
 
     if (error) {
       console.error("Error fetching challenges: ", error);
-      setLoading(false);
+      setLoadingChallenge(false);
       return;
     }
 
     if (!data) {
       setChallengeDetails(null);
-      setLoading(false);
+      setLoadingChallenge(false);
       return;
     }
 
@@ -69,7 +70,7 @@ function Challenge() {
       messages: messages,
       facility: facility,
     });
-    setLoading(false);
+    setLoadingChallenge(false);
   }
 
   useEffect(() => {
@@ -92,6 +93,7 @@ function Challenge() {
           filter: `challenge_id=eq.${challengeId}`,
         },
         () => {
+          // TODO: just fetch the updated data instead of everything
           loadChallengeDetails();
         },
       )
@@ -110,7 +112,27 @@ function Challenge() {
     }
   }, [challengeDetails?.messages]);
 
-  if (loading) return <p>Loading messages...</p>;
+  async function onSend(message: string) {
+    if (!userId || isSending || !challengeId || message.trim() === "") return;
+    setMessage("");
+    setIsSending(true);
+
+    const { error: messageError } = await supabase.from("messages").insert({
+      challenge_id: challengeId,
+      content: message,
+      sender_user_id: userId,
+    });
+
+    if (messageError) {
+      console.error("Error sending message: ", messageError);
+      setIsSending(false);
+      return;
+    }
+    // TODO: Display chatmessage imediately to avoid lag by relying on real-time 
+    setIsSending(false);
+  }
+
+  if (loadingChallenge) return <p>Loading messages...</p>;
   if (!challengeDetails) return <p>Failed to load challenge</p>;
 
   return (
@@ -178,7 +200,11 @@ function Challenge() {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Write a message..."
           />
-          <button className="send-btn gb-green-btn">
+          <button
+            className="send-btn gb-green-btn"
+            onClick={() => onSend(message)}
+            disabled={isSending}
+          >
             <Send />
           </button>
         </div>
