@@ -75,6 +75,32 @@ function Challenge() {
     loadChallengeDetails();
   }, [userId, challengeId]);
 
+  // Live update on new messages
+  // No further channels required since challenge status changes generate new messages
+  useEffect(() => {
+    if (!userId) return;
+
+    const channel = supabase
+      .channel("challenge-messages")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "messages",
+          filter: `challenge_id=eq.${challengeId}`,
+        },
+        () => {
+          loadChallengeDetails();
+        },
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [userId, challengeId]);
+
   if (loading) return <p>Loading messages...</p>;
   if (!challengeDetails) return <p>Failed to load challenge</p>;
 
