@@ -28,6 +28,7 @@ function Challenge() {
   const [challengeDetails, setChallengeDetails] =
     useState<ChallengeDetails | null>(null);
   const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
 
   async function loadChallengeDetails() {
     if (!userId || !challengeId) {
@@ -101,13 +102,13 @@ function Challenge() {
     };
   }, [userId, challengeId]);
 
-  const chatRef = useRef<HTMLDivElement>(null)
+  const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
-  },[challengeDetails?.messages])
+  }, [challengeDetails?.messages]);
 
   if (loading) return <p>Loading messages...</p>;
   if (!challengeDetails) return <p>Failed to load challenge</p>;
@@ -170,7 +171,13 @@ function Challenge() {
         </div>
         {/* input  */}
         <div className="chat-input gb-input-group">
-          <textarea className="text-area" rows={1} />
+          <textarea
+            className="text-area"
+            rows={1}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Write a message..."
+          />
           <button className="send-btn gb-green-btn">
             <Send />
           </button>
