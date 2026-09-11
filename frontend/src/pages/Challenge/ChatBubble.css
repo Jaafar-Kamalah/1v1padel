@@ -1,7 +1,6 @@
 .chat-bubble {
   display: flex;
   flex-direction: column;
-  margin: 14px 0;
 }
 
 .chat-bubble .mine {
@@ -13,6 +12,8 @@
 }
 
 .chat-bubble .theirs {
+  display: flex;
+  flex-direction: column;
   align-self: flex-start;
   align-items: flex-start;
   margin-left: 16px;
@@ -24,7 +25,7 @@
 }
 
 .chat-bubble .content {
-  padding: 10px 13px;
+  padding: 8px 11px;
   font-size: 15px;
   border-radius: 14px;
   font-weight: 500;

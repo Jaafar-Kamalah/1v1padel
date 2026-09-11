@@ -7,11 +7,17 @@
   width: 100%;
   max-width: 720px;
   background-color: var(--darker-bg);
-  margin: 20px 0;
+  margin: 15px 0 0 0;
   border-radius: 8px;
   border: 1px solid var(--light-gray);
   padding: 0;
   text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  height: 720px;
+  max-height: calc(100vh - 95px); 
+  overflow: hidden;
 }
 
 /* ---------- Opponent info ---------- */
@@ -84,4 +90,13 @@
 .challenge-page .meta-value {
     font-size: 16px;
     font-weight: 500;
+}
+
+/* ---------- Chat and textarea ---------- */
+.challenge-page .chat{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 7px 0;
+  overflow-y: auto;
 }
