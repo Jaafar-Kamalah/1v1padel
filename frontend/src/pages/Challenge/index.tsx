@@ -133,11 +133,27 @@ function Challenge() {
   }
 
   function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key == 'Enter' && !e.shiftKey) {
+    if (e.key == "Enter" && !e.shiftKey) {
       e.preventDefault();
       onSend(message);
     }
   }
+// Status buttons handling
+  function reportWin(){
+    alert("won");
+  }
+
+  function reportLoss() {
+    alert("Lost");
+  }
+
+    function acceptChallenge() {
+      alert("Accept");
+    }
+
+    function DenyChallenge() {
+      alert("Deny");
+    }
 
   if (loadingChallenge) return <p>Loading messages...</p>;
   if (!challengeDetails) return <p>Failed to load challenge</p>;
@@ -186,6 +202,29 @@ function Challenge() {
             </div>
           </div>
           {/* Buttons */}
+          {challengeDetails.challenge.status === "pending" && (
+            <div className="status-btns">
+              <button className="status-btn gb-green-btn" onClick={acceptChallenge}>
+                Accept Challenge
+              </button>
+              <button className="status-btn gb-gray-btn" onClick={DenyChallenge}>
+                Deny Challenge
+              </button>
+            </div>
+          )}
+          {challengeDetails.challenge.status === "accepted" && (
+            <div className="status-btns">
+              <button className="status-btn gb-green-btn" onClick={reportWin}>
+                Report Win
+              </button>
+              <button className="status-btn gb-gray-btn" onClick={reportLoss}>
+                Report Loss
+              </button>
+              {/* <button className="status-btn gb-gray-btn" onClick={reportTie}>
+                We Tied
+              </button> */}
+            </div>
+          )}
         </div>
         {/* Chat */}
         <div className="chat" ref={chatRef}>
