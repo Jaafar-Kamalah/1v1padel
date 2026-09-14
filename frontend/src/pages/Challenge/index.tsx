@@ -128,8 +128,15 @@ function Challenge() {
       setIsSending(false);
       return;
     }
-    // TODO: Display chatmessage imediately to avoid lag by relying on real-time 
+    // TODO: Display chatmessage imediately to avoid lag by relying on real-time
     setIsSending(false);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key == 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      onSend(message);
+    }
   }
 
   if (loadingChallenge) return <p>Loading messages...</p>;
@@ -199,6 +206,7 @@ function Challenge() {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Write a message..."
+            onKeyDown={handleKeyDown}
           />
           <button
             className="send-btn gb-green-btn"

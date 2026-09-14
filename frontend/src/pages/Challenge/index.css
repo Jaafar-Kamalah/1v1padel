@@ -101,11 +101,11 @@
   overflow-y: auto;
   scrollbar-color: var(--light-gray) transparent;
   border-bottom: 1px solid var(--light-gray);
-    /* flex: 1;
-  min-height: 0; */
+  flex: 1;
+  min-height: 0;
 }
 
-.challenge-page .chat-input{
+.challenge-page .chat-input {
   display: flex;
   align-items: flex-end;
   gap: 10px;
