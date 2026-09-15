@@ -18,7 +18,8 @@ values
   ('VH Padel', 'Skeppsbyggaregatan 7, Malmö', 'https://assets.matchi.se/archive/2024/05/thumb_c936e566745e446edd2beca58b1b62a5.jpg'),
   ('Popup Padel Bromma', 'Linta gårdsväg 5B, Stockholm', 'https://assets.matchi.se/archive/2021/08/thumb_c24433ab1b5ab8de326c536a9ecb9629.jpg'),
   ('Padel 343 Taberg', 'Taklasvägen 42, Jönköping', 'https://assets.matchi.se/archive/2021/10/thumb_cfecd3c625e443eca4cb8c9dcdfa93ca.jpg'),
-  ('Lillån Padel Örebro', 'Saluvägen 2, Örebro', 'https://assets.matchi.se/archive/2023/02/thumb_7702fed01a45cecd3a181ea968ebb3ce.jpg');
+  ('Lillån Padel Örebro', 'Saluvägen 2, Örebro', 'https://assets.matchi.se/archive/2023/02/thumb_7702fed01a45cecd3a181ea968ebb3ce.jpg'),
+  ('Nordic Wellness Högsbo', 'August Barks Gata 2, Göteborg', 'https://assets.matchi.se/archive/2025/04/thumb_9678b831486d09b0e91d3f4556a86cfe.jpg');
 
 
 -- ============================================================
@@ -72,6 +73,7 @@ create table public.messages (
   id             serial primary key,
   sent_at        timestamptz not null default now(),
   content        text not null,
+  is_status_message boolean not null default false,
 
   challenge_id   integer not null references public.challenges(id) on delete cascade,
   sender_user_id uuid not null references auth.users(id) on delete cascade
@@ -302,7 +304,8 @@ after update on public.challenges
 for each row execute function public.update_ratings();
 
 -- ============================================================
--- messages policies: users can see and send new messages
+-- messages policies: users can see and send new messages,
+-- updating the challenge status generates a status message
 -- ============================================================
 grant select on public.messages to authenticated;
 grant insert (content, challenge_id, sender_user_id) on public.messages to authenticated;
@@ -330,6 +333,50 @@ with check (
     auth.uid() in (c.sender_user_id, c.receiver_user_id)
   )
 );
+
+-- Generate a status message when challange status changes:
+-- (pending -> accepted), (pending -> denied), (acceepted -> completed)
+create or replace function public.create_status_message()
+returns trigger as $$
+declare
+  user_id uuid := auth.uid();
+  user_first_name text;
+  message_content text;
+begin
+  -- Only continue if status of challenge changed to either "accepted", "denied" or "completed"
+  if new.status = old.status or 
+  (new.status not in ('accepted', 'denied', 'completed')) then
+    return new;
+  end if;
+ 
+  select first_name into user_first_name
+  from public.profiles
+  where id = user_id;
+ 
+  if new.status = 'accepted' then
+    message_content := user_first_name || ' has accepted the challenge';
+ 
+  elsif new.status = 'denied' then
+    message_content := user_first_name || ' has denied the challenge';
+ 
+  elsif new.status = 'completed' then
+    if new.winner_user_id = user_id then
+      message_content := user_first_name || ' has reported that they won the game';
+    else
+      message_content := user_first_name || ' has reported that they lost the game';
+    end if;
+  end if;
+ 
+  insert into public.messages (challenge_id, sender_user_id, content, is_status_message)
+  values (new.id, user_id, message_content, true);
+ 
+  return new;
+end;
+$$ language plpgsql security definer set search_path = public;
+
+create trigger status_message_trigger
+after update on public.challenges
+for each row execute function public.create_status_message();
 
 -- ============================================================
 -- initial_ratings policies: everyone can see all initial_ratings
