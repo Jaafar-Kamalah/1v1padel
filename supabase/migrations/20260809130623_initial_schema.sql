@@ -13,7 +13,12 @@ values
   ('Nordic Wellness Linköping Tornby Padel', 'Fröstorpsgatan 10, Linköping', 'https://assets.matchi.se/archive/2022/03/thumb_ae073ee112b48cbd025a020a1d9774fc.jpg'),
   ('Alfa Padel & Co', 'Industrigatan 5, Linköping', 'https://assets.matchi.se/archive/2023/04/thumb_f448d8b5ead524f9b857174c2e2d4ebd.jpg'),
   ('Torvinge Padel Arena', 'Idögatan 8, Linköping', 'https://assets.matchi.se/archive/2023/10/thumb_310d812d143b2903dd86d8c82d83164f.jpg'),
-  ('Peking Padel Norrköping', 'Kiselgatan 33, Norrköping', 'https://assets.matchi.se/archive/2023/03/thumb_0d76cdd8454f033f96c38d669eac4847.jpg');
+  ('Peking Padel Norrköping', 'Kiselgatan 33, Norrköping', 'https://assets.matchi.se/archive/2023/03/thumb_0d76cdd8454f033f96c38d669eac4847.jpg'),
+  ('Brew Padel Ringön', 'Ringögatan 10, Göteborg', 'https://assets.matchi.se/archive/2023/10/thumb_8d6c1a47ddc63368ac2ec8cc93e7d7aa.jpg'),
+  ('VH Padel', 'Skeppsbyggaregatan 7, Malmö', 'https://assets.matchi.se/archive/2024/05/thumb_c936e566745e446edd2beca58b1b62a5.jpg'),
+  ('Popup Padel Bromma', 'Linta gårdsväg 5B, Stockholm', 'https://assets.matchi.se/archive/2021/08/thumb_c24433ab1b5ab8de326c536a9ecb9629.jpg'),
+  ('Padel 343 Taberg', 'Taklasvägen 42, Jönköping', 'https://assets.matchi.se/archive/2021/10/thumb_cfecd3c625e443eca4cb8c9dcdfa93ca.jpg'),
+  ('Lillån Padel Örebro', 'Saluvägen 2, Örebro', 'https://assets.matchi.se/archive/2023/02/thumb_7702fed01a45cecd3a181ea968ebb3ce.jpg');
 
 
 -- ============================================================
