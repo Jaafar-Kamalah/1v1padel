@@ -29,6 +29,7 @@ function Challenge() {
     useState<ChallengeDetails | null>(null);
   const [loadingChallenge, setLoadingChallenge] = useState(true);
   const [isSending, setIsSending] = useState(false);
+  const [isUpdatingStatus, setIsUpdatingStatus] = useState(false); // new
   const [message, setMessage] = useState("");
 
   async function loadChallengeDetails() {
@@ -138,22 +139,40 @@ function Challenge() {
       onSend(message);
     }
   }
-// Status buttons handling
-  function reportWin(){
-    alert("won");
+  // Status buttons handling
+  async function changeStatus(newStatus: string, winnerUserId?: string) {
+    if (!userId || !newStatus || !challengeId) return;
+    setIsUpdatingStatus(true);
+
+    const { error } = await supabase
+      .from("challenges")
+      .update({ status: newStatus, winner_user_id: winnerUserId ?? null })
+      .eq("id", challengeId);
+
+    if (error) {
+      console.error("Error updating challenge status: ", error);
+    }
+
+    setIsUpdatingStatus(false);
+  }
+
+  function reportWin() {
+    if (!userId) return;
+    changeStatus("completed", userId);
   }
 
   function reportLoss() {
-    alert("Lost");
+    if (!challengeDetails?.opponent.id) return;
+    changeStatus("completed", challengeDetails?.opponent.id);
   }
 
-    function acceptChallenge() {
-      alert("Accept");
-    }
+  function acceptChallenge() {
+    changeStatus("accepted");
+  }
 
-    function DenyChallenge() {
-      alert("Deny");
-    }
+  function denyChallenge() {
+    changeStatus("denied");
+  }
 
   if (loadingChallenge) return <p>Loading messages...</p>;
   if (!challengeDetails) return <p>Failed to load challenge</p>;
@@ -202,24 +221,46 @@ function Challenge() {
             </div>
           </div>
           {/* Buttons */}
-          {challengeDetails.challenge.status === "pending" && (
-            <div className="status-btns">
-              <button className="status-btn gb-green-btn" onClick={acceptChallenge}>
-                Accept Challenge
-              </button>
-              <button className="status-btn gb-gray-btn" onClick={DenyChallenge}>
-                Deny Challenge
-              </button>
-            </div>
-          )}
+          {challengeDetails.challenge.status === "pending" &&
+            userId == challengeDetails.challenge.receiver_user_id && (
+              <div className="status-btns">
+                <button
+                  className="status-btn gb-green-btn"
+                  onClick={acceptChallenge}
+                  disabled={isUpdatingStatus}
+                >
+                  Accept Challenge
+                </button>
+                <button
+                  className="status-btn gb-gray-btn"
+                  onClick={denyChallenge}
+                  disabled={isUpdatingStatus}
+                >
+                  Deny Challenge
+                </button>
+                {/* TODO */}
+                {/* <button className="status-btn gb-gray-btn" onClick={changeTime}>
+                  Change Time
+                </button> */}
+              </div>
+            )}
           {challengeDetails.challenge.status === "accepted" && (
             <div className="status-btns">
-              <button className="status-btn gb-green-btn" onClick={reportWin}>
+              <button
+                className="status-btn gb-green-btn"
+                onClick={reportWin}
+                disabled={isUpdatingStatus}
+              >
                 Report Win
               </button>
-              <button className="status-btn gb-gray-btn" onClick={reportLoss}>
+              <button
+                className="status-btn gb-gray-btn"
+                onClick={reportLoss}
+                disabled={isUpdatingStatus}
+              >
                 Report Loss
               </button>
+              {/* TODO */}
               {/* <button className="status-btn gb-gray-btn" onClick={reportTie}>
                 We Tied
               </button> */}
