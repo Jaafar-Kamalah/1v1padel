@@ -58,7 +58,7 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" disabled={loading}>
+          <button className="gb-green-btn" type="submit" disabled={loading}>
             Log In
           </button>
         </form>

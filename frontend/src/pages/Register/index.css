@@ -12,8 +12,6 @@
 
 .register-page button {
     width: 100%;
-    border-radius: 10px;
-    background-color: green;
     padding: 10px;
     font: 20px;
 }

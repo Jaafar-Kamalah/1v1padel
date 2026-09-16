@@ -124,7 +124,7 @@ function Register() {
               ))}
             </select>
           </div>
-          <button type="submit" disabled={loading}>
+          <button className="gb-green-btn" type="submit" disabled={loading}>
             Continue
           </button>
         </form>

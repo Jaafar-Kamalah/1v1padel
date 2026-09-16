@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "./index.css"
+import "./index.css";
 import { useAuthContext } from "../../contexts/AuthContext";
 import supabase from "../../lib/supabase";
 
 function Profile() {
   const [loggingOut, setLoggingOut] = useState(false);
-  
+
   async function logout() {
     setLoggingOut(true);
     const { error } = await supabase.auth.signOut();
@@ -16,14 +16,14 @@ function Profile() {
     setLoggingOut(false);
   }
 
-  const {session} = useAuthContext();
+  const { session } = useAuthContext();
 
   return (
     <div className="profile-page">
       <div className="card">
         <h1>Profile</h1>
         <p>Email: {session?.user.email}</p>
-        <button disabled={loggingOut} onClick={logout}>
+        <button className="gb-gray-btn" disabled={loggingOut} onClick={logout}>
           {loggingOut ? "Logging out..." : "Log Out"}
         </button>
       </div>
