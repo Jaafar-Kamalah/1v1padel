@@ -39,6 +39,7 @@ function Register() {
     <div className="login-page">
       <div className="card">
         <form onSubmit={handleSubmit}>
+          <h1>Welcome back!</h1>
           <div className="gb-input-group">
             <input
               type="email"

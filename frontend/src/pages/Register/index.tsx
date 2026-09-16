@@ -72,7 +72,7 @@ function Register() {
     <div className="register-page">
       <div className="card">
         <form onSubmit={handleSubmit}>
-          <h1>Register an Account</h1>
+          <h1>Create an account</h1>
           <div className="gb-input-group">
             <input
               type="text"
