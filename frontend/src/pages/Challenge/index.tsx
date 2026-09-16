@@ -113,19 +113,20 @@ function Challenge() {
     }
   }, [challengeDetails?.messages]);
 
-  async function onSend(message: string) {
-    if (!userId || isSending || !challengeId || message.trim() === "") return;
+  async function onSend(text: string) {
+    if (!userId || isSending || !challengeId || text.trim() === "") return;
     setMessage("");
     setIsSending(true);
 
     const { error: messageError } = await supabase.from("messages").insert({
       challenge_id: challengeId,
-      content: message,
+      content: text,
       sender_user_id: userId,
     });
 
     if (messageError) {
       console.error("Error sending message: ", messageError);
+      setMessage(text); // restore message if send failed
       setIsSending(false);
       return;
     }
@@ -183,7 +184,7 @@ function Challenge() {
         <div className="header">
           {/* Opponent information */}
           <div className="opponent">
-            <span className="name  gb-ellipsis">
+            <span className="name gb-ellipsis">
               {challengeDetails.opponent.first_name}{" "}
               {challengeDetails.opponent.last_name}
             </span>
