@@ -26,7 +26,6 @@ function Register() {
         console.error("Supabase error: " + error.message);
         return;
       }
-      alert("Login succeeded!");
       navigate("/");
     } catch (err) {
       alert("Unexpected error: " + err);

@@ -59,7 +59,6 @@ function Register() {
         // A user without a profile can't however cause damage so not a security risk atm
         return;
       }
-      alert("Registration succeeded!");
       navigate("/");
     } catch (err) {
       alert("Unexpected error: " + err);
