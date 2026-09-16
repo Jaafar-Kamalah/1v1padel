@@ -233,7 +233,7 @@ function Challenge() {
                   Accept Challenge
                 </button>
                 <button
-                  className="status-btn gb-gray-btn"
+                  className="status-btn gb-red-btn"
                   onClick={denyChallenge}
                   disabled={isUpdatingStatus}
                 >

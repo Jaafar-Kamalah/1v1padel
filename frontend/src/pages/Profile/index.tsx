@@ -23,7 +23,7 @@ function Profile() {
       <div className="card">
         <h1>Profile</h1>
         <p>Email: {session?.user.email}</p>
-        <button className="gb-gray-btn" disabled={loggingOut} onClick={logout}>
+        <button className="gb-red-btn" disabled={loggingOut} onClick={logout}>
           {loggingOut ? "Logging out..." : "Log Out"}
         </button>
       </div>

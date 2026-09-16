@@ -150,7 +150,7 @@ function Facility() {
     if (joinedEntry) {
       return (
         <button
-          className="leave-btn gb-gray-btn"
+          className="leave-btn gb-red-btn"
           disabled={membershipActionLoading}
           onClick={leaveFacility}
         >
