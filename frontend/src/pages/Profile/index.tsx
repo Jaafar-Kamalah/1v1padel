@@ -1,10 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
 import { useAuthContext } from "../../contexts/AuthContext";
 import supabase from "../../lib/supabase";
+import type { Database } from "../../../../supabase/types";
+
+type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
 function Profile() {
+  const { session } = useAuthContext();
+  const userId = session?.user?.id;
   const [loggingOut, setLoggingOut] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState<Profile | null>(null);
+
+  useEffect(() => {
+    async function loadProfile() {
+      if (!userId) return;
+
+      setLoading(true);
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .maybeSingle();
+
+      if (error) {
+        console.error("Error fetching profile: ", error);
+      } else {
+        setProfile(data);
+      }
+      setLoading(false);
+    }
+
+    loadProfile();
+  }, [userId]);
 
   async function logout() {
     setLoggingOut(true);
@@ -16,7 +46,7 @@ function Profile() {
     setLoggingOut(false);
   }
 
-  const { session } = useAuthContext();
+  if (loading) return <p>Loading profile...</p>;
 
   return (
     <div className="profile-page">
