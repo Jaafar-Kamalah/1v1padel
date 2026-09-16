@@ -19,8 +19,16 @@
   margin-left: 16px;
 }
 
+.chat-bubble .status-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
 .chat-bubble .mine,
-.chat-bubble .theirs {
+.chat-bubble .theirs{
   max-width: 80%;
 }
 
@@ -38,6 +46,26 @@
 
 .chat-bubble .mine .content {
   background-image: var(--green-gradient);
+}
+
+.chat-bubble .info-icon {
+  height: 22px;
+  width: 22px;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+}
+
+.chat-bubble .status-message .content {
+  background-color: rgba(0, 102, 255, 0.12);
+  color: rgba(255,255,255,0.7);
+  font-weight: 600;
+  width: 100%;
+  position: relative;
+}
+
+.chat-bubble .status-message .content-text {
+  margin-left: 25px;
 }
 
 .chat-bubble .mine .content {

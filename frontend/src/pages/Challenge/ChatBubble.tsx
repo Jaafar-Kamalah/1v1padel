@@ -1,9 +1,11 @@
+import { Info } from "lucide-react";
 import "./ChatBubble.css";
 
 interface Props {
   content: string;
   sentAt: string;
-  mine: boolean;
+  isMine: boolean;
+  isStatusMessage: boolean;
 }
 
 function formatTime(pastDate: string): string {
@@ -29,11 +31,18 @@ function formatTime(pastDate: string): string {
       });
 }
 
-function ChatBubble({ content, sentAt, mine }: Props) {
+function ChatBubble({ content, sentAt, isMine, isStatusMessage }: Props) {
   return (
     <div className="chat-bubble">
-      <div className={(mine ? "mine" : "theirs")}>
-        <div className="content">{content}</div>
+      <div
+        className={
+          isStatusMessage ? "status-message" : isMine ? "mine" : "theirs"
+        }
+      >
+        <div className="content">
+          {isStatusMessage && <Info className="info-icon" />}
+          <span className="content-text">{content}</span>
+        </div>
         <div className="sent-at">{formatTime(sentAt)}</div>
       </div>
     </div>

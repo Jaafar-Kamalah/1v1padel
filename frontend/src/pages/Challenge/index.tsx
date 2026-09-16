@@ -274,7 +274,8 @@ function Challenge() {
               key={message.id}
               content={message.content}
               sentAt={message.sent_at}
-              mine={message.sender_user_id === userId}
+              isMine={message.sender_user_id === userId}
+              isStatusMessage={message.is_status_message}
             />
           ))}
         </div>
