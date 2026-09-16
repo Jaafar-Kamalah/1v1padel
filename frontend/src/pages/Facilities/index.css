@@ -1,5 +1,6 @@
 .home-page {
   padding: 2rem 0;
+  padding: 0;
 }
 
 .home-page h1 {
@@ -19,7 +20,7 @@
 
 .home-page .fac-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 250px));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 220px));
   gap: clamp(1rem, 2vw, 2rem);
   width: 100%;
   justify-content: center;
