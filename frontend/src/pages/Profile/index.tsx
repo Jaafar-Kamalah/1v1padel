@@ -4,14 +4,14 @@ import { useAuthContext } from "../../contexts/AuthContext";
 import supabase from "../../lib/supabase";
 import type { Database } from "../../../../supabase/types";
 
-type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+type Account = Database["public"]["Tables"]["profiles"]["Row"];
 
-function Profile() {
+function Account() {
   const { session } = useAuthContext();
   const userId = session?.user?.id;
   const [loggingOut, setLoggingOut] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [profile, setProfile] = useState<Profile | null>(null);
+  const [profile, setProfile] = useState<Account | null>(null);
 
   useEffect(() => {
     async function loadProfile() {
@@ -46,12 +46,12 @@ function Profile() {
     setLoggingOut(false);
   }
 
-  if (loading) return <p>Loading profile...</p>;
+  if (loading) return <p>Loading account information...</p>;
 
   return (
-    <div className="profile-page">
+    <div className="account-page">
       <div className="card">
-        <h1>Profile</h1>
+        <h1>Account</h1>
         <div className="field">
           <span className="label">First Name:</span>{" "}
           <span className="value">{profile?.first_name}</span>
@@ -88,4 +88,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default Account;

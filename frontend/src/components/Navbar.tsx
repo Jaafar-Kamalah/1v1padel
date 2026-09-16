@@ -43,7 +43,7 @@ function Navbar() {
               </Link>
             </li>
             <li>
-              <Link to="/profile" aria-label="Profile">
+              <Link to="/account" aria-label="Account">
                 <User className="icon" />
               </Link>
             </li>

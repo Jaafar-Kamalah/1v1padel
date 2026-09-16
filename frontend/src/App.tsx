@@ -4,7 +4,7 @@ import Facilities from "./pages/Facilities";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Challenges from "./pages/Challenges";
-import Profile from "./pages/Profile";
+import Account from "./pages/Profile";
 import Facility from "./pages/Facility";
 import PrivateRoute from "./components/PrivateRoute";
 import PublicRoute from "./components/PublicRoute";
@@ -52,16 +52,16 @@ function App() {
           path="/challenges/:challengeId"
           element={
             <PrivateRoute>
-              <Challenge/>
+              <Challenge />
             </PrivateRoute>
           }
         />
         ,
         <Route
-          path="/profile"
+          path="/account"
           element={
             <PrivateRoute>
-              <Profile />
+              <Account />
             </PrivateRoute>
           }
         />

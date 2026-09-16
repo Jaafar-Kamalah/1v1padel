@@ -1,10 +1,10 @@
-.profile-page {
+.account-page {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.profile-page .card {
+.account-page .card {
   width: 100%;
   max-width: 550px;
   background-color: var(--darker-bg);
@@ -14,7 +14,7 @@
   border: 1px solid var(--light-gray);
 }
 
-.profile-page h1 {
+.account-page h1 {
   margin: 0;
   font-weight: 700;
   line-height: 1;
@@ -23,7 +23,7 @@
   margin-top: 20px;
 }
 
-.profile-page .field {
+.account-page .field {
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -31,16 +31,16 @@
   border-top: 1px solid var(--light-gray);
 }
 
-.profile-page .label {
+.account-page .label {
   color: var(--gray-text-color);
   font-weight: 500;
 }
 
-.profile-page .value{
+.account-page .value{
     font-weight: 500;
 }
 
-.profile-page button {
+.account-page button {
   width: min(550px, 100%);
   padding: 10px;
   font: 20px;
