@@ -1,6 +1,6 @@
-# SoloPadel
+# 1v1Padel
  
-SoloPadel is a web application designed for singles padel players. Players can find opponents with a similar skill level, challenge each other, track their ratings, and compete on real-time leaderboards. A demo of the application with Swedish commentary is available at: https://www.youtube.com/watch?v=CQHOhRNlZhM.
+1v1Padel is a web application designed for singles padel players. Players can find opponents with a similar skill level, challenge each other, track their ratings, and compete on real-time leaderboards. A demo of the application with Swedish commentary is available at: https://www.youtube.com/watch?v=CQHOhRNlZhM.
  
 ## Features
 - User registration and authentication
